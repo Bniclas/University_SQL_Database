@@ -10,6 +10,13 @@ CREATE TABLE IF NOT EXISTS gender (
 	PRIMARY KEY( gender )
 );
 
+CREATE TABLE IF NOT EXISTS semester(
+	semester_id BIGINT UNSIGNED AUTO_INCREMENT,
+	semster_start DATE NOT NULL,
+	semester_end DATE NOT NULL,
+	PRIMARY KEY ( semester_id )
+);
+
 CREATE TABLE IF NOT EXISTS postcode (
 	postcode_code VARCHAR( 5 ),
 	postcode_city VARCHAR( 60 ) UNIQUE NOT NULL,
@@ -137,20 +144,40 @@ CREATE TABLE IF NOT EXISTS student (
 
 CREATE TABLE IF NOT EXISTS module (
 	module_id BIGINT UNSIGNED AUTO_INCREMENT,
-	fk_prof BIGINT UNSIGNED NOT NULL,
+	fk_moduleleader BIGINT UNSIGNED NOT NULL,
 	PRIMARY KEY (module_id),
+	FOREIGN KEY ( fk_moduleleader ) REFERENCES employee( employee_id )
+);
+
+CREATE TABLE IF NOT EXISTS course (
+	course_id BIGINT UNSIGNED AUTO_INCREMENT,
+	fk_module BIGINT UNSIGNED NOT NULL,
+	fk_semester BIGINT UNSIGNED,
+	fk_prof BIGINT UNSIGNED NOT NULL,
+	PRIMARY KEY ( course_id ),
+	FOREIGN KEY ( fk_module ) REFERENCES module( module_id ),
+	FOREIGN KEY ( fk_semester ) REFERENCES semester( semester_id ),
 	FOREIGN KEY ( fk_prof ) REFERENCES employee( employee_id )
+);
+
+CREATE TABLE IF NOT EXISTS course_session (
+	fk_course BIGINT UNSIGNED NOT NULL,
+	fk_timeslot BIGINT UNSIGNED NOT NULL,
+	fk_room BIGINT UNSIGNED NOT NULL,
+	FOREIGN KEY ( fk_course ) REFERENCES course( course_id ),
+	FOREIGN KEY ( fk_timeslot ) REFERENCES timeslot( slot_id ),
+	FOREIGN KEY ( fk_room ) REFERENCES room( room_id )
 );
 
 CREATE TABLE IF NOT EXISTS exam (
 	exam_nr BIGINT UNSIGNED AUTO_INCREMENT,
-	fk_module BIGINT UNSIGNED NOT NULL,
+	fk_course BIGINT UNSIGNED NOT NULL,
 	logon_date DATETIME NOT NULL,
 	logout_date DATETIME NOT NULL,
 	max_points TINYINT UNSIGNED,
 	fk_room BIGINT UNSIGNED,
 	PRIMARY KEY ( exam_nr ),
-	FOREIGN KEY ( fk_module ) REFERENCES module ( module_id ),
+	FOREIGN KEY ( fk_course ) REFERENCES course ( course_id ),
 	FOREIGN KEY ( fk_room ) REFERENCES room ( room_id )
 );
 
@@ -164,14 +191,6 @@ CREATE TABLE IF NOT EXISTS exam_results (
 	FOREIGN KEY ( fk_matnr ) REFERENCES student( mat_id ) 
 );
 
-CREATE TABLE IF NOT EXISTS course_session (
-	fk_module BIGINT UNSIGNED NOT NULL,
-	fk_timeslot BIGINT UNSIGNED NOT NULL,
-	fk_room BIGINT UNSIGNED NOT NULL,
-	FOREIGN KEY ( fk_module ) REFERENCES module( module_id ),
-	FOREIGN KEY ( fk_timeslot ) REFERENCES timeslot( slot_id ),
-	FOREIGN KEY ( fk_room ) REFERENCES room( room_id )
-);
 
 INSERT INTO gender VALUES( "m", "male" );
 INSERT INTO gender VALUES( "f", "female" );
