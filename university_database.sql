@@ -80,6 +80,7 @@ CREATE TABLE IF NOT EXISTS person (
 	person_id BIGINT UNSIGNED AUTO_INCREMENT,
 	gender VARCHAR(3) NOT NULL,
 	email VARCHAR( 60 ) UNIQUE NOT NULL,
+	password VARCHAR( 255 ),
 	firstname VARCHAR(60) NOT NULL,
 	surname VARCHAR(60) NOT NULL,
 	birthdate DATE NOT NULL,
@@ -146,6 +147,7 @@ CREATE TABLE IF NOT EXISTS exam (
 	fk_module BIGINT UNSIGNED NOT NULL,
 	logon_date DATETIME NOT NULL,
 	logout_date DATETIME NOT NULL,
+	max_points TINYINT UNSIGNED,
 	fk_room BIGINT UNSIGNED,
 	PRIMARY KEY ( exam_nr ),
 	FOREIGN KEY ( fk_module ) REFERENCES module ( module_id ),
@@ -156,6 +158,8 @@ CREATE TABLE IF NOT EXISTS exam_results (
 	fk_exam BIGINT UNSIGNED NOT NULL,
 	fk_matnr BIGINT UNSIGNED NOT NULL,
 	attempt ENUM( "1", "2", "3" ) NOT NULL,
+	reached_points TINYINT UNSIGNED,
+	reached_mark DOUBLE(2,1),
 	FOREIGN KEY ( fk_exam ) REFERENCES exam( exam_nr ),
 	FOREIGN KEY ( fk_matnr ) REFERENCES student( mat_id ) 
 );
@@ -206,20 +210,20 @@ INSERT INTO degree VALUES( NULL, "Dr. med." );
 INSERT INTO degree VALUES( NULL, "Prof." );
 INSERT INTO degree VALUES( NULL, "Prof. habil." );
 
-INSERT INTO person VALUES( NULL, "m", "email_01@anymailservice.com", "Amber", "Apple", "2002-05-12", "03123", "Anywhere", "Mystreet 247", NULL );
-INSERT INTO person VALUES( NULL, "m", "email_02@anymailservice.com", "Amber", "Apple", "2002-05-12", "03123", "Anywhere", "Mystreet 247", NULL );
-INSERT INTO person VALUES( NULL, "m", "email_03@anymailservice.com", "Amber", "Apple", "2002-05-12", "03123", "Anywhere", "Mystreet 247", 3 );
-INSERT INTO person VALUES( NULL, "m", "email_04@anymailservice.com", "Amber", "Apple", "2002-05-12", "03123", "Anywhere", "Mystreet 247", NULL );
-INSERT INTO person VALUES( NULL, "f", "email_05@anymailservice.com", "Amber", "Apple", "2002-05-12", "03123", "Anywhere", "Mystreet 247", 1 );
-INSERT INTO person VALUES( NULL, "f", "email_06@anymailservice.com", "Amber", "Apple", "2002-05-12", "03123", "Anywhere", "Mystreet 247", NULL );
-INSERT INTO person VALUES( NULL, "f", "email_07@anymailservice.com", "Amber", "Apple", "2002-05-12", "03123", "Anywhere", "Mystreet 247", 2 );
-INSERT INTO person VALUES( NULL, "f", "email_08@anymailservice.com", "Amber", "Apple", "2002-05-12", "03123", "Anywhere", "Mystreet 247", NULL );
-INSERT INTO person VALUES( NULL, "f", "email_09@anymailservice.com", "Amber", "Apple", "2002-05-12", "03123", "Anywhere", "Mystreet 247", NULL );
-INSERT INTO person VALUES( NULL, "f", "email_10@anymailservice.com", "Amber", "Apple", "2002-05-12", "03123", "Anywhere", "Mystreet 247", 1 );
-INSERT INTO person VALUES( NULL, "f", "email_11@anymailservice.com", "Amber", "Apple", "2002-05-12", "03123", "Anywhere", "Mystreet 247", NULL );
-INSERT INTO person VALUES( NULL, "m", "email_12@anymailservice.com", "Amber", "Apple", "2002-05-12", "03123", "Anywhere", "Mystreet 247", NULL );
-INSERT INTO person VALUES( NULL, "m", "email_13@anymailservice.com", "Amber", "Apple", "2002-05-12", "03123", "Anywhere", "Mystreet 247", 4 );
-INSERT INTO person VALUES( NULL, "m", "email_14@anymailservice.com", "Amber", "Apple", "2002-05-12", "03123", "Anywhere", "Mystreet 247", NULL );
+INSERT INTO person VALUES( NULL, "m", "email_01@anymailservice.com", "213123h1##+123#123%!das", "Amber", "Apple", "2002-05-12", "03123", "Anywhere", "Mystreet 247", NULL );
+INSERT INTO person VALUES( NULL, "m", "email_02@anymailservice.com", "213123h1##+123#123%!das", "Amber", "Apple", "2002-05-12", "03123", "Anywhere", "Mystreet 247", NULL );
+INSERT INTO person VALUES( NULL, "m", "email_03@anymailservice.com", "213123h1##+123#123%!das", "Amber", "Apple", "2002-05-12", "03123", "Anywhere", "Mystreet 247", 3 );
+INSERT INTO person VALUES( NULL, "m", "email_04@anymailservice.com", "213123h1##+123#123%!das", "Amber", "Apple", "2002-05-12", "03123", "Anywhere", "Mystreet 247", NULL );
+INSERT INTO person VALUES( NULL, "f", "email_05@anymailservice.com", "213123h1##+123#123%!das", "Amber", "Apple", "2002-05-12", "03123", "Anywhere", "Mystreet 247", 1 );
+INSERT INTO person VALUES( NULL, "f", "email_06@anymailservice.com", "213123h1##+123#123%!das", "Amber", "Apple", "2002-05-12", "03123", "Anywhere", "Mystreet 247", NULL );
+INSERT INTO person VALUES( NULL, "f", "email_07@anymailservice.com", "213123h1##+123#123%!das", "Amber", "Apple", "2002-05-12", "03123", "Anywhere", "Mystreet 247", 2 );
+INSERT INTO person VALUES( NULL, "f", "email_08@anymailservice.com", "213123h1##+123#123%!das", "Amber", "Apple", "2002-05-12", "03123", "Anywhere", "Mystreet 247", NULL );
+INSERT INTO person VALUES( NULL, "f", "email_09@anymailservice.com", "213123h1##+123#123%!das", "Amber", "Apple", "2002-05-12", "03123", "Anywhere", "Mystreet 247", NULL );
+INSERT INTO person VALUES( NULL, "f", "email_10@anymailservice.com", "213123h1##+123#123%!das", "Amber", "Apple", "2002-05-12", "03123", "Anywhere", "Mystreet 247", 1 );
+INSERT INTO person VALUES( NULL, "f", "email_11@anymailservice.com", "213123h1##+123#123%!das", "Amber", "Apple", "2002-05-12", "03123", "Anywhere", "Mystreet 247", NULL );
+INSERT INTO person VALUES( NULL, "m", "email_12@anymailservice.com", "213123h1##+123#123%!das", "Amber", "Apple", "2002-05-12", "03123", "Anywhere", "Mystreet 247", NULL );
+INSERT INTO person VALUES( NULL, "m", "email_13@anymailservice.com", "213123h1##+123#123%!das", "Amber", "Apple", "2002-05-12", "03123", "Anywhere", "Mystreet 247", 4 );
+INSERT INTO person VALUES( NULL, "m", "email_14@anymailservice.com", "213123h1##+123#123%!das", "Amber", "Apple", "2002-05-12", "03123", "Anywhere", "Mystreet 247", NULL );
 
 INSERT INTO employee VALUES( NULL, 1, 3, 1 );
 INSERT INTO employee VALUES( NULL, 6, 2, 1 );
