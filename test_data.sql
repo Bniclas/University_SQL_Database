@@ -107,3 +107,8 @@ INSERT INTO `university`.`exam` (`fk_course`, `logon_date`, `logout_date`, `max_
 INSERT INTO `university`.`exam` (`fk_course`, `logon_date`, `logout_date`, `max_points`, `fk_room`) VALUES ('2', '2024-08-10 07:50:41', '2024-08-10 07:50:44', '90', '2');
 INSERT INTO `university`.`exam` (`fk_course`, `logon_date`, `logout_date`, `max_points`, `fk_room`) VALUES ('3', '2024-08-10 07:50:41', '2024-08-10 07:50:44', '90', '3');
 INSERT INTO `university`.`exam` (`fk_course`, `logon_date`, `logout_date`, `max_points`, `fk_room`) VALUES ('4', '2024-08-10 07:50:41', '2024-08-10 07:50:44', '90', '4');
+
+INSERT INTO exam_results VALUES( 1, 2, 1, 85, 1.3 );
+INSERT INTO exam_results VALUES( 2, 2, 1, 80, 1.7 );
+INSERT INTO exam_results VALUES( 1, 1, 1, 85, 2.3 );
+INSERT INTO exam_results VALUES( 2, 1, 1, 81, 1.0 );
