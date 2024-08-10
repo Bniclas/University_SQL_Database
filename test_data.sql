@@ -10,6 +10,15 @@ INSERT INTO university_locations VALUES( NULL, "Campus Meining", "Heinzenstrasse
 INSERT INTO university_locations VALUES( NULL, "Campus Dumpeln", "Rumboldstrasse 71b", "53121" );
 INSERT INTO university_locations VALUES( NULL, "Aussenstelle Dumpeln", "Kamelweg 31c", "53121" );
 
+INSERT INTO room VALUES( NULL, 100, 1, 1 );
+INSERT INTO room VALUES( NULL, 200, 1, 1 );
+INSERT INTO room VALUES( NULL, 300, 2, 1 );
+INSERT INTO room VALUES( NULL, 400, 2, 1 );
+
+INSERT INTO room VALUES( NULL, 100, 2, 2 );
+INSERT INTO room VALUES( NULL, 200, 2, 2 );
+INSERT INTO room VALUES( NULL, 300, 2, 2 );
+
 INSERT INTO department VALUES( NULL, "Department of Chemistry Dumpeln", 2 );
 INSERT INTO department VALUES( NULL, "Department of IT Meining", 1 );
 
@@ -51,11 +60,11 @@ INSERT INTO person VALUES( NULL, "m", "email_13@anymailservice.com", "213123h1##
 INSERT INTO person VALUES( NULL, "m", "email_14@anymailservice.com", "213123h1##+123#123%!das", "Amber", "Apple", "2002-05-12", "03123", "Anywhere", "Mystreet 247", NULL );
 
 INSERT INTO employee VALUES( NULL, 1, 3, 1 );
+INSERT INTO employee VALUES( NULL, 2, 2, 1 );
+INSERT INTO employee VALUES( NULL, 3, 5, 2 );
+INSERT INTO employee VALUES( NULL, 4, 2, 4 );
+INSERT INTO employee VALUES( NULL, 5, 1, 3 );
 INSERT INTO employee VALUES( NULL, 6, 2, 1 );
-INSERT INTO employee VALUES( NULL, 2, 5, 2 );
-INSERT INTO employee VALUES( NULL, 8, 2, 4 );
-INSERT INTO employee VALUES( NULL, 7, 1, 3 );
-INSERT INTO employee VALUES( NULL, 3, 2, 1 );
 
 INSERT INTO department_staff VALUES( 1, 1, DATE_ADD( CURRENT_DATE, INTERVAL - 10 DAY), DATE_ADD( CURRENT_DATE, INTERVAL + 360 DAY) );
 INSERT INTO department_staff VALUES( 4, 2, DATE_ADD( CURRENT_DATE, INTERVAL - 140 DAY), DATE_ADD( CURRENT_DATE, INTERVAL + 360 DAY) );
@@ -64,3 +73,37 @@ INSERT INTO department_staff VALUES( 2, 1, DATE_ADD( CURRENT_DATE, INTERVAL - 10
 
 INSERT INTO discipline VALUES( NULL, "Biochemistry", "6", 1, 2 );
 INSERT INTO discipline VALUES( NULL, "Information Technology", "6", 3, 1 );
+
+INSERT INTO student VALUES( NULL, 7, 1, CURRENT_DATE, 1 );
+INSERT INTO student VALUES( NULL, 8, 1, CURRENT_DATE, 1 );
+INSERT INTO student VALUES( NULL, 9, 2, CURRENT_DATE, 2 );
+INSERT INTO student VALUES( NULL, 10, 2, CURRENT_DATE, 2 );
+
+INSERT INTO `university`.`module` (`module_name`, `module_ects`, `fk_moduleleader`) VALUES ('Information Systems Basics', '5', '1');
+INSERT INTO `university`.`module` (`module_name`, `module_ects`, `fk_moduleleader`) VALUES ('Databases', '10', '4');
+INSERT INTO `university`.`module` (`module_name`, `module_ects`, `fk_moduleleader`) VALUES ('Math I', '5', '2');
+INSERT INTO `university`.`module` (`module_name`, `module_ects`, `fk_moduleleader`) VALUES ('Math II', '7', '2');
+INSERT INTO `university`.`module` (`module_name`, `module_ects`, `fk_moduleleader`) VALUES ('Math III', '7', '1');
+
+INSERT INTO semester VALUES( NULL, "SS", "2024-04-01", "2024-08-01" );
+INSERT INTO semester VALUES( NULL, "WS", "2024-10-01", "2025-02-01" );
+
+INSERT INTO `university`.`timeslot` (`start_at`, `end_at`) VALUES ('2024-08-10 08:00:00', '2024-08-10 10:00:00');
+INSERT INTO `university`.`timeslot` (`start_at`, `end_at`) VALUES ('2024-08-10 08:00:00', '2024-08-10 10:00:00');
+
+INSERT INTO course VALUES( NULL, 1, 1, 2 );
+INSERT INTO course VALUES( NULL, 4, 1, 3 );
+INSERT INTO course VALUES( NULL, 2, 1, 1 );
+INSERT INTO course VALUES( NULL, 3, 1, 4 );
+INSERT INTO course VALUES( NULL, 1, 2, 1 );
+
+INSERT INTO course_session VALUES( 1, 1, 1 );
+INSERT INTO course_session VALUES( 1, 2, 1 );
+INSERT INTO course_session VALUES( 2, 1, 2 );
+INSERT INTO course_session VALUES( 2, 1, 2 );
+INSERT INTO course_session VALUES( 1, 1, 1 );
+
+INSERT INTO `university`.`exam` (`fk_course`, `logon_date`, `logout_date`, `max_points`, `fk_room`) VALUES ('1', '2024-08-10 07:50:41', '2024-08-10 07:50:44', '90', '1');
+INSERT INTO `university`.`exam` (`fk_course`, `logon_date`, `logout_date`, `max_points`, `fk_room`) VALUES ('2', '2024-08-10 07:50:41', '2024-08-10 07:50:44', '90', '2');
+INSERT INTO `university`.`exam` (`fk_course`, `logon_date`, `logout_date`, `max_points`, `fk_room`) VALUES ('3', '2024-08-10 07:50:41', '2024-08-10 07:50:44', '90', '3');
+INSERT INTO `university`.`exam` (`fk_course`, `logon_date`, `logout_date`, `max_points`, `fk_room`) VALUES ('4', '2024-08-10 07:50:41', '2024-08-10 07:50:44', '90', '4');

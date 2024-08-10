@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS gender (
 
 CREATE TABLE IF NOT EXISTS semester(
 	semester_id BIGINT UNSIGNED AUTO_INCREMENT,
+	semester_typ ENUM( "WS", "SS" ) NOT NULL,
 	semester_start DATE NOT NULL,
 	semester_end DATE NOT NULL,
 	PRIMARY KEY ( semester_id ),
@@ -146,6 +147,8 @@ CREATE TABLE IF NOT EXISTS student (
 
 CREATE TABLE IF NOT EXISTS module (
 	module_id BIGINT UNSIGNED AUTO_INCREMENT,
+	module_name NVARCHAR( 100 ) UNIQUE NOT NULL,
+	module_ects TINYINT UNSIGNED NOT NULL,
 	fk_moduleleader BIGINT UNSIGNED NOT NULL,
 	PRIMARY KEY (module_id),
 	FOREIGN KEY ( fk_moduleleader ) REFERENCES employee( employee_id )
