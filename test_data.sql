@@ -45,26 +45,19 @@ INSERT INTO degree VALUES( NULL, "Prof." );
 INSERT INTO degree VALUES( NULL, "Prof. habil." );
 
 INSERT INTO person VALUES( NULL, "m", "email_01@anymailservice.com", "213123h1##+123#123%!das", "Amber", "Apple", "2002-05-12", "03123", "Anywhere", "Mystreet 247", NULL );
-INSERT INTO person VALUES( NULL, "m", "email_02@anymailservice.com", "213123h1##+123#123%!das", "Amber", "Apple", "2002-05-12", "03123", "Anywhere", "Mystreet 247", NULL );
-INSERT INTO person VALUES( NULL, "m", "email_03@anymailservice.com", "213123h1##+123#123%!das", "Amber", "Apple", "2002-05-12", "03123", "Anywhere", "Mystreet 247", 3 );
-INSERT INTO person VALUES( NULL, "m", "email_04@anymailservice.com", "213123h1##+123#123%!das", "Amber", "Apple", "2002-05-12", "03123", "Anywhere", "Mystreet 247", NULL );
-INSERT INTO person VALUES( NULL, "f", "email_05@anymailservice.com", "213123h1##+123#123%!das", "Amber", "Apple", "2002-05-12", "03123", "Anywhere", "Mystreet 247", 1 );
-INSERT INTO person VALUES( NULL, "f", "email_06@anymailservice.com", "213123h1##+123#123%!das", "Amber", "Apple", "2002-05-12", "03123", "Anywhere", "Mystreet 247", NULL );
-INSERT INTO person VALUES( NULL, "f", "email_07@anymailservice.com", "213123h1##+123#123%!das", "Amber", "Apple", "2002-05-12", "03123", "Anywhere", "Mystreet 247", 2 );
-INSERT INTO person VALUES( NULL, "f", "email_08@anymailservice.com", "213123h1##+123#123%!das", "Amber", "Apple", "2002-05-12", "03123", "Anywhere", "Mystreet 247", NULL );
-INSERT INTO person VALUES( NULL, "f", "email_09@anymailservice.com", "213123h1##+123#123%!das", "Amber", "Apple", "2002-05-12", "03123", "Anywhere", "Mystreet 247", NULL );
-INSERT INTO person VALUES( NULL, "f", "email_10@anymailservice.com", "213123h1##+123#123%!das", "Amber", "Apple", "2002-05-12", "03123", "Anywhere", "Mystreet 247", 1 );
-INSERT INTO person VALUES( NULL, "f", "email_11@anymailservice.com", "213123h1##+123#123%!das", "Amber", "Apple", "2002-05-12", "03123", "Anywhere", "Mystreet 247", NULL );
-INSERT INTO person VALUES( NULL, "m", "email_12@anymailservice.com", "213123h1##+123#123%!das", "Amber", "Apple", "2002-05-12", "03123", "Anywhere", "Mystreet 247", NULL );
-INSERT INTO person VALUES( NULL, "m", "email_13@anymailservice.com", "213123h1##+123#123%!das", "Amber", "Apple", "2002-05-12", "03123", "Anywhere", "Mystreet 247", 4 );
-INSERT INTO person VALUES( NULL, "m", "email_14@anymailservice.com", "213123h1##+123#123%!das", "Amber", "Apple", "2002-05-12", "03123", "Anywhere", "Mystreet 247", NULL );
+INSERT INTO person VALUES( NULL, "m", "email_02@anymailservice.com", "213123h1##+123#123%!das", "Bella", "Born", "2002-05-12", "03123", "Anywhere", "Mystreet 247", NULL );
+INSERT INTO person VALUES( NULL, "m", "email_03@anymailservice.com", "213123h1##+123#123%!das", "Cynia", "Cynisch", "2002-05-12", "03123", "Anywhere", "Mystreet 247", 3 );
+INSERT INTO person VALUES( NULL, "m", "email_04@anymailservice.com", "213123h1##+123#123%!das", "David", "Davos", "2002-05-12", "03123", "Anywhere", "Mystreet 247", NULL );
+INSERT INTO person VALUES( NULL, "f", "email_05@anymailservice.com", "213123h1##+123#123%!das", "Elbe", "Ebers", "2002-05-12", "03123", "Anywhere", "Mystreet 247", 1 );
+INSERT INTO person VALUES( NULL, "f", "email_06@anymailservice.com", "213123h1##+123#123%!das", "Fred", "Friend", "2002-05-12", "03123", "Anywhere", "Mystreet 247", NULL );
+INSERT INTO person VALUES( NULL, "f", "email_07@anymailservice.com", "213123h1##+123#123%!das", "George", "Gong", "2002-05-12", "03123", "Anywhere", "Mystreet 247", 2 );
+INSERT INTO person VALUES( NULL, "f", "email_08@anymailservice.com", "213123h1##+123#123%!das", "Hella", "Hample", "2002-05-12", "03123", "Anywhere", "Mystreet 247", NULL );
+INSERT INTO person VALUES( NULL, "f", "email_09@anymailservice.com", "213123h1##+123#123%!das", "Ian", "Ino", "2002-05-12", "03123", "Anywhere", "Mystreet 247", NULL );
 
 INSERT INTO employee VALUES( NULL, 1, 3, 1 );
 INSERT INTO employee VALUES( NULL, 2, 2, 1 );
 INSERT INTO employee VALUES( NULL, 3, 5, 2 );
 INSERT INTO employee VALUES( NULL, 4, 2, 4 );
-INSERT INTO employee VALUES( NULL, 5, 1, 3 );
-INSERT INTO employee VALUES( NULL, 6, 2, 1 );
 
 INSERT INTO department_staff VALUES( 1, 1, DATE_ADD( CURRENT_DATE, INTERVAL - 10 DAY), DATE_ADD( CURRENT_DATE, INTERVAL + 360 DAY) );
 INSERT INTO department_staff VALUES( 4, 2, DATE_ADD( CURRENT_DATE, INTERVAL - 140 DAY), DATE_ADD( CURRENT_DATE, INTERVAL + 360 DAY) );
@@ -74,10 +67,11 @@ INSERT INTO department_staff VALUES( 2, 1, DATE_ADD( CURRENT_DATE, INTERVAL - 10
 INSERT INTO discipline VALUES( NULL, "Biochemistry", "6", 1, 2 );
 INSERT INTO discipline VALUES( NULL, "Information Technology", "6", 3, 1 );
 
-INSERT INTO student VALUES( NULL, 7, 1, CURRENT_DATE, 1 );
-INSERT INTO student VALUES( NULL, 8, 1, CURRENT_DATE, 1 );
-INSERT INTO student VALUES( NULL, 9, 2, CURRENT_DATE, 2 );
-INSERT INTO student VALUES( NULL, 10, 2, CURRENT_DATE, 2 );
+INSERT INTO student VALUES( NULL, 5 );
+INSERT INTO student VALUES( NULL, 6 );
+INSERT INTO student VALUES( NULL, 7 );
+INSERT INTO student VALUES( NULL, 8 );
+INSERT INTO student VALUES( NULL, 9 );
 
 INSERT INTO `university`.`module` (`module_name`, `module_ects`, `fk_moduleleader`) VALUES ('Information Systems Basics', '5', '1');
 INSERT INTO `university`.`module` (`module_name`, `module_ects`, `fk_moduleleader`) VALUES ('Databases', '10', '4');
@@ -108,7 +102,7 @@ INSERT INTO `university`.`exam` (`fk_course`, `logon_date`, `logout_date`, `max_
 INSERT INTO `university`.`exam` (`fk_course`, `logon_date`, `logout_date`, `max_points`, `fk_room`) VALUES ('3', '2024-08-10 07:50:41', '2024-08-10 07:50:44', '90', '3');
 INSERT INTO `university`.`exam` (`fk_course`, `logon_date`, `logout_date`, `max_points`, `fk_room`) VALUES ('4', '2024-08-10 07:50:41', '2024-08-10 07:50:44', '90', '4');
 
-INSERT INTO exam_results VALUES( 1, 2, 1, 85, 1.3 );
-INSERT INTO exam_results VALUES( 2, 2, 1, 80, 1.7 );
-INSERT INTO exam_results VALUES( 1, 1, 1, 85, 2.3 );
-INSERT INTO exam_results VALUES( 2, 1, 1, 81, 1.0 );
+INSERT INTO exam_result VALUES( 1, 2, 1, 85, 1.3 );
+INSERT INTO exam_result VALUES( 2, 2, 1, 80, 1.7 );
+INSERT INTO exam_result VALUES( 1, 1, 1, 85, 2.3 );
+INSERT INTO exam_result VALUES( 2, 1, 1, 81, 1.0 );
