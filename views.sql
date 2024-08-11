@@ -70,7 +70,7 @@ ORDER BY course.course_id;
     Shows all courses and their mark average
 */
 CREATE VIEW view_course_mark_average AS
-SELECT course_mark_average.course_id, AVG( student_reached_mark ) FROM (
+SELECT course_mark_average.course_id as "CourseID", AVG( student_reached_mark ) as "Course_Markaverage" FROM (
 	SELECT 
 		course.course_id,
 		student.mat_id,
@@ -87,19 +87,10 @@ GROUP BY course_mark_average.course_id;
     Shows all modules and their mark averages from their courses
 */
 CREATE VIEW view_module_mark_average AS
-SELECT module.module_id, AVG(course_mark_avg) FROM (
-	SELECT course_mark_average.course_id AS "course_id", AVG( course_mark_average.student_reached_mark ) AS "course_mark_avg" FROM (
-		SELECT 
-			course.course_id,
-			student.mat_id,
-			AVG( reached_mark ) AS "student_reached_mark"
-		FROM student 
-		INNER JOIN exam_result ON fk_matid = mat_id
-		INNER JOIN exam ON exam.exam_nr = exam_result.fk_exam
-		INNER JOIN course ON course.course_id = exam.fk_course
-		GROUP BY course.course_id, student.mat_id
-	) AS course_mark_average
-	GROUP BY course_mark_average.course_id
+SELECT module.module_id AS "Module_ID", AVG(course_mark_avg) AS "Module_Markaverage" FROM (
+	SELECT view_course_mark_average.CourseID AS "course_id", AVG( view_course_mark_average.Course_Markaverage ) AS "course_mark_avg" 
+	FROM view_course_mark_average
+	GROUP BY view_course_mark_average.CourseID
 ) AS module_mark_average
 INNER JOIN module ON module.module_id = module_mark_average.course_id
 GROUP BY module.module_id;
