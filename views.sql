@@ -87,10 +87,15 @@ GROUP BY course_mark_average.course_id;
     Shows all modules and their mark averages from their courses
 */
 CREATE VIEW view_module_mark_average AS
-SELECT module.module_id AS "Module_ID", AVG(course_mark_avg) AS "Module_Markaverage" FROM (
-	SELECT view_course_mark_average.CourseID AS "course_id", AVG( view_course_mark_average.Course_Markaverage ) AS "course_mark_avg" 
-	FROM view_course_mark_average
-	GROUP BY view_course_mark_average.CourseID
+SELECT module_mark_average.fk_module as "ModuleID", AVG( student_reached_mark ) as "Module_Markaverage" FROM (
+	SELECT 
+		course.fk_module,
+		student.mat_id,
+		AVG( reached_mark ) AS "student_reached_mark"
+	FROM student 
+	INNER JOIN exam_result ON fk_matid = mat_id
+	INNER JOIN exam ON exam.exam_nr = exam_result.fk_exam
+	INNER JOIN course ON course.course_id = exam.fk_course
+	GROUP BY course.fk_module, student.mat_id
 ) AS module_mark_average
-INNER JOIN module ON module.module_id = module_mark_average.course_id
-GROUP BY module.module_id;
+GROUP BY module_mark_average.fk_module;
