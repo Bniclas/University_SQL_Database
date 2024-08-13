@@ -44,15 +44,15 @@ INSERT INTO degree VALUES( NULL, "Dr. med." );
 INSERT INTO degree VALUES( NULL, "Prof." );
 INSERT INTO degree VALUES( NULL, "Prof. habil." );
 
-INSERT INTO person VALUES( NULL, "m", "email_01@anymailservice.com", "213123h1##+123#123%!das", "Amber", "Apple", "2002-05-12", "03123", "Anywhere", "Mystreet 247", NULL );
-INSERT INTO person VALUES( NULL, "m", "email_02@anymailservice.com", "213123h1##+123#123%!das", "Bella", "Born", "2002-05-12", "03123", "Anywhere", "Mystreet 247", NULL );
-INSERT INTO person VALUES( NULL, "m", "email_03@anymailservice.com", "213123h1##+123#123%!das", "Cynia", "Cynisch", "2002-05-12", "03123", "Anywhere", "Mystreet 247", 3 );
-INSERT INTO person VALUES( NULL, "m", "email_04@anymailservice.com", "213123h1##+123#123%!das", "David", "Davos", "2002-05-12", "03123", "Anywhere", "Mystreet 247", NULL );
-INSERT INTO person VALUES( NULL, "f", "email_05@anymailservice.com", "213123h1##+123#123%!das", "Elbe", "Ebers", "2002-05-12", "03123", "Anywhere", "Mystreet 247", 1 );
-INSERT INTO person VALUES( NULL, "f", "email_06@anymailservice.com", "213123h1##+123#123%!das", "Fred", "Friend", "2002-05-12", "03123", "Anywhere", "Mystreet 247", NULL );
-INSERT INTO person VALUES( NULL, "f", "email_07@anymailservice.com", "213123h1##+123#123%!das", "George", "Gong", "2002-05-12", "03123", "Anywhere", "Mystreet 247", 2 );
-INSERT INTO person VALUES( NULL, "f", "email_08@anymailservice.com", "213123h1##+123#123%!das", "Hella", "Hample", "2002-05-12", "03123", "Anywhere", "Mystreet 247", NULL );
-INSERT INTO person VALUES( NULL, "f", "email_09@anymailservice.com", "213123h1##+123#123%!das", "Ian", "Ino", "2002-05-12", "03123", "Anywhere", "Mystreet 247", NULL );
+INSERT INTO person VALUES( NULL, "m", "email_01@anymailservice.com", "email_01@privatemail.com", "213123h1##+123#123%!das", "Amber", "Apple", "2002-05-12", "03123", "Anywhere", "Mystreet 247", NULL );
+INSERT INTO person VALUES( NULL, "m", "email_02@anymailservice.com", "email_02@privatemail.com", "213123h1##+123#123%!das", "Bella", "Born", "2002-05-12", "03123", "Anywhere", "Mystreet 247", NULL );
+INSERT INTO person VALUES( NULL, "m", "email_03@anymailservice.com", "email_03@privatemail.com", "213123h1##+123#123%!das", "Cynia", "Cynisch", "2002-05-12", "03123", "Anywhere", "Mystreet 247", 3 );
+INSERT INTO person VALUES( NULL, "m", "email_04@anymailservice.com", "email_04@privatemail.com", "213123h1##+123#123%!das", "David", "Davos", "2002-05-12", "03123", "Anywhere", "Mystreet 247", NULL );
+INSERT INTO person VALUES( NULL, "f", "email_05@anymailservice.com", "email_05@privatemail.com", "213123h1##+123#123%!das", "Elbe", "Ebers", "2002-05-12", "03123", "Anywhere", "Mystreet 247", 1 );
+INSERT INTO person VALUES( NULL, "f", "email_06@anymailservice.com", "email_06@privatemail.com", "213123h1##+123#123%!das", "Fred", "Friend", "2002-05-12", "03123", "Anywhere", "Mystreet 247", NULL );
+INSERT INTO person VALUES( NULL, "f", "email_07@anymailservice.com", "email_07@privatemail.com", "213123h1##+123#123%!das", "George", "Gong", "2002-05-12", "03123", "Anywhere", "Mystreet 247", 2 );
+INSERT INTO person VALUES( NULL, "f", "email_08@anymailservice.com", "email_08@privatemail.com", "213123h1##+123#123%!das", "Hella", "Hample", "2002-05-12", "03123", "Anywhere", "Mystreet 247", NULL );
+INSERT INTO person VALUES( NULL, "f", "email_09@anymailservice.com", "email_09@privatemail.com", "213123h1##+123#123%!das", "Ian", "Ino", "2002-05-12", "03123", "Anywhere", "Mystreet 247", NULL );
 
 INSERT INTO employee VALUES( NULL, 1, 3, 1 );
 INSERT INTO employee VALUES( NULL, 2, 2, 1 );
@@ -106,3 +106,10 @@ INSERT INTO exam_result VALUES( 1, 2, 1, 85, 1.3 );
 INSERT INTO exam_result VALUES( 2, 2, 1, 80, 1.7 );
 INSERT INTO exam_result VALUES( 1, 1, 1, 85, 2.3 );
 INSERT INTO exam_result VALUES( 2, 1, 1, 81, 1.0 );
+
+
+INSERT INTO `university`.`student_course` (`fk_course`, `fk_matid`) VALUES ('1', '1');
+INSERT INTO `university`.`student_course` (`fk_course`, `fk_matid`) VALUES ('1', '2');
+INSERT INTO `university`.`student_course` (`fk_course`, `fk_matid`) VALUES ('1', '3');
+INSERT INTO `university`.`student_course` (`fk_course`, `fk_matid`) VALUES ('3', '5');
+INSERT INTO `university`.`student_course` (`fk_course`, `fk_matid`) VALUES ('3', '3');

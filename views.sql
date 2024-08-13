@@ -4,7 +4,8 @@
 CREATE VIEW view_student_information AS
 SELECT  student.mat_id as "Matriculation number",
         gender.gender_name as "Gender",
-        person.email as "Email",
+        person.email_private as "Private Email",
+        person.email_service as "Service Email",
         CONCAT( person.firstname, ' ', person.surname ) as "Name",
         CONCAT( person.postcode, ' ', person.location, ' ', person.street ) as "Address", 
         person.birthdate as "Birthdate"

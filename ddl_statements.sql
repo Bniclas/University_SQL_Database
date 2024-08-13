@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS gender (
 );
 
 CREATE TABLE IF NOT EXISTS semester (
-	semester_id INT UNSIGNED AUTO_INCREMENT,
+	semester_id MEDIUMINT UNSIGNED AUTO_INCREMENT,
 	semester_typ ENUM( "WS", "SS" ) NOT NULL,
 	semester_start DATE NOT NULL,
 	semester_end DATE NOT NULL,
@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS room (
 );
 
 CREATE TABLE IF NOT EXISTS timeslot (
-	slot_id INT UNSIGNED AUTO_INCREMENT,
+	slot_id SMALLINT UNSIGNED AUTO_INCREMENT,
 	start_at DATETIME NOT NULL,
 	end_at DATETIME NOT NULL,
 	PRIMARY KEY( slot_id ),
@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS department (
 );
 
 CREATE TABLE IF NOT EXISTS job (
-	job_id INT UNSIGNED AUTO_INCREMENT,
+	job_id SMALLINT UNSIGNED AUTO_INCREMENT,
 	job_name NVARCHAR( 100 ) UNIQUE NOT NULL,
 	PRIMARY KEY ( job_id )
 );
@@ -89,7 +89,8 @@ CREATE TABLE IF NOT EXISTS degree (
 CREATE TABLE IF NOT EXISTS person (
 	person_id INT UNSIGNED AUTO_INCREMENT,
 	gender NVARCHAR(3) NOT NULL,
-	email NVARCHAR( 60 ) UNIQUE NOT NULL,
+	email_private NVARCHAR( 60 ) UNIQUE NOT NULL,
+	email_service NVARCHAR( 60 ) UNIQUE NOT NULL,
 	password NVARCHAR( 255 ),
 	firstname NVARCHAR(60) NOT NULL,
 	surname NVARCHAR(60) NOT NULL,
@@ -105,7 +106,7 @@ CREATE TABLE IF NOT EXISTS person (
 CREATE TABLE IF NOT EXISTS employee (
 	employee_id INT UNSIGNED AUTO_INCREMENT,
 	fk_person INT UNSIGNED UNIQUE NOT NULL,
-	fk_job INT UNSIGNED NOT NULL,
+	fk_job SMALLINT UNSIGNED NOT NULL,
 	fk_salary INT UNSIGNED NOT NULL,
 	PRIMARY KEY ( employee_id ),
 	FOREIGN KEY ( fk_person ) REFERENCES person( person_id ),
@@ -144,8 +145,8 @@ CREATE TABLE IF NOT EXISTS student (
 CREATE TABLE IF NOT EXISTS student_discipline (
 	fk_matid INT UNSIGNED NOT NULL,
 	fk_discipline INT UNSIGNED NOT NULL,
-	semester_start INT UNSIGNED NOT NULL,
-	semester_end INT UNSIGNED,
+	semester_start MEDIUMINT UNSIGNED NOT NULL,
+	semester_end MEDIUMINT UNSIGNED,
 	FOREIGN KEY ( fk_matid ) REFERENCES student( mat_id ),
 	FOREIGN KEY ( fk_discipline ) REFERENCES discipline( discipline_id ),
 	FOREIGN KEY ( semester_start ) REFERENCES semester( semester_id ),
@@ -172,7 +173,7 @@ CREATE TABLE IF NOT EXISTS module (
 CREATE TABLE IF NOT EXISTS course (
 	course_id INT UNSIGNED AUTO_INCREMENT,
 	fk_module INT UNSIGNED NOT NULL,
-	fk_semester INT UNSIGNED,
+	fk_semester MEDIUMINT UNSIGNED,
 	fk_prof INT UNSIGNED NOT NULL,
 	PRIMARY KEY ( course_id ),
 	FOREIGN KEY ( fk_module ) REFERENCES module( module_id ),
@@ -182,7 +183,7 @@ CREATE TABLE IF NOT EXISTS course (
 
 CREATE TABLE IF NOT EXISTS course_session (
 	fk_course INT UNSIGNED NOT NULL,
-	fk_timeslot INT UNSIGNED NOT NULL,
+	fk_timeslot SMALLINT UNSIGNED NOT NULL,
 	fk_room INT UNSIGNED NOT NULL,
 	FOREIGN KEY ( fk_course ) REFERENCES course( course_id ),
 	FOREIGN KEY ( fk_timeslot ) REFERENCES timeslot( slot_id ),
