@@ -1,0 +1,6 @@
+# Ignoring the node modules folder
+node_modules/
+
+# Ignoring local avatars or backgrounds
+public/avatars/
+public/images/backgrounds/

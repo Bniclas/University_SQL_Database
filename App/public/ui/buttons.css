@@ -1,0 +1,18 @@
+.CategoryButton {
+    border-radius: 30px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: aquamarine;
+    min-width: 15%;
+    max-width: 15%;
+    min-height: 15%;
+    max-height: 15%;
+    padding: 20px;
+    background-color: azure;
+    margin: 5px;
+}
+
+.CategoryButton:hover {
+    background-color: rgb(196, 196, 196);
+    cursor: pointer;
+}

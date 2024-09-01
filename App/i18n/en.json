@@ -1,0 +1,12 @@
+{
+    "btn_coursa_data": "Show Course Data",
+    "btn_student_info": "Show Student Information",
+    "btn_exams": "Show Exams",
+    "matric_num": "Matriculation Number",
+    "gender": "Gender",
+    "mail_private": "Private Email",
+    "mail_service": "Service Email",
+    "fullname": "Fullname",
+    "address": "Address",
+    "birthdate": "Birthdate"
+}
