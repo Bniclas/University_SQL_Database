@@ -83,7 +83,7 @@ app.get('/course_overview', async function(request, response) {
 	try {
 		await SQLDB.execute('SELECT * FROM view_course_student_amount;', [])
 		.then( async([rows,fields]) => {
-			response.render( 'course_overview', { student_data: rows } );
+			response.render( 'course_overview', { course_data: rows } );
 		});
 	}
 	catch (e){
@@ -93,12 +93,25 @@ app.get('/course_overview', async function(request, response) {
 });
 
 app.get('/course_mark_average', async function(request, response) {
-
+	const courseid = request.query.courseid;
 	try {
-		await SQLDB.execute('SELECT * FROM view_course_mark_average;', [])
-		.then( async([rows,fields]) => {
-			response.render( 'course_mark_average', { student_data: rows } );
-		});
+		if ( courseid ) {
+			await SQLDB.execute('SELECT * FROM view_course_mark_average WHERE courseid = ?', [courseid])
+			.then( async([rows,fields]) => {
+				if ( rows.length == 0 ){
+					goHome(request, response);
+				}
+				else {
+					response.render( 'course_mark_average', { course_data : rows, chosen: true } );
+				}
+			});
+		}
+		else {
+			await SQLDB.execute('SELECT * FROM view_course_mark_average;', [])
+			.then( async([rows,fields]) => {
+				response.render( 'course_mark_average', { course_data : rows, chosen: false } );
+			});
+		}
 	}
 	catch (e){
 		console.log( e );

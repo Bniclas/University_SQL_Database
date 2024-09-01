@@ -8,7 +8,7 @@ SELECT  student.mat_id as "Matriculation number",
         person.email_service as "Service Email",
         CONCAT( person.firstname, ' ', person.surname ) as "Name",
         CONCAT( person.postcode, ' ', person.location, ' ', person.street ) as "Address", 
-        person.birthdate as "Birthdate"
+        SUBSTRING( person.birthdate, 1, 12 ) as "Birthdate"
 FROM student 
 INNER JOIN person ON person.person_id = student.fk_person
 INNER JOIN gender ON gender.gender = person.gender;
@@ -19,7 +19,7 @@ INNER JOIN gender ON gender.gender = person.gender;
 */
 CREATE VIEW view_markaverage_student_all AS
 SELECT  mat_id as "Matriculation number", 
-        AVG( reached_mark ) "Grade average"
+        ROUND( AVG( reached_mark ), 2 ) "Grade average"
 FROM student 
 LEFT JOIN exam_result ON fk_matid = mat_id
 GROUP BY mat_id;
@@ -30,7 +30,7 @@ GROUP BY mat_id;
 */
 CREATE VIEW view_markaverage_student_filter AS
 SELECT  mat_id as "Matriculation number", 
-        AVG( reached_mark ) "Grade average"
+        ROUND( AVG( reached_mark ), 2 ) "Grade average"
 FROM student 
 INNER JOIN exam_result ON fk_matid = mat_id
 GROUP BY mat_id;
@@ -71,7 +71,7 @@ ORDER BY course.course_id;
     Shows all courses and their mark average
 */
 CREATE VIEW view_course_mark_average AS
-SELECT course_mark_average.course_id as "CourseID", AVG( student_reached_mark ) as "Course_Markaverage" FROM (
+SELECT course_mark_average.course_id as "CourseID", ROUND( AVG( student_reached_mark ), 2 ) as "Course_Markaverage" FROM (
 	SELECT 
 		course.course_id,
 		student.mat_id,
@@ -88,11 +88,11 @@ GROUP BY course_mark_average.course_id;
     Shows all modules and their mark averages from their courses
 */
 CREATE VIEW view_module_mark_average AS
-SELECT module_mark_average.fk_module as "ModuleID", AVG( student_reached_mark ) as "Module_Markaverage" FROM (
+SELECT module_mark_average.fk_module as "ModuleID", ROUND( AVG( student_reached_mark ), 2 )as "Module_Markaverage" FROM (
 	SELECT 
 		course.fk_module,
 		student.mat_id,
-		AVG( reached_mark ) AS "student_reached_mark"
+		AVG( reached_mark )AS "student_reached_mark"
 	FROM student 
 	INNER JOIN exam_result ON fk_matid = mat_id
 	INNER JOIN exam ON exam.exam_nr = exam_result.fk_exam

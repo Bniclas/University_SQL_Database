@@ -17,13 +17,13 @@
                         <th><%= translation.amount_students %></th>
                     </tr>
 
-                    <% if (student_data.length > 0){  %>
-                        <% student_data.forEach( function(student) { %>
+                    <% if (course_data.length > 0){  %>
+                        <% course_data.forEach( function(course) { %>
                             <tr>
-                                <td> <%= student["Course ID"] %> </td>
-                                <td> <%= student["Module Name"] %> </td>
-                                <td> <%= student["Professor"] %> </td>
-                                <td> <%= student["Amount students"] %> </td>
+                                <td> <a href="/course_mark_average?courseid=<%= course['Course ID'] %>"> <%= course["Course ID"] %> </a> </td>
+                                <td> <%= course["Module Name"] %> </td>
+                                <td> <%= course["Professor"] %> </td>
+                                <td> <%= course["Amount students"] %> </td>
                             </tr>
                         <% }) %>
                     <% }; %>

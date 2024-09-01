@@ -1,6 +1,6 @@
-INSERT INTO gender VALUES( "m", "male" );
-INSERT INTO gender VALUES( "f", "female" );
-INSERT INTO gender VALUES( "d", "divers" );
+INSERT INTO gender VALUES( "m", "Male" );
+INSERT INTO gender VALUES( "f", "Female" );
+INSERT INTO gender VALUES( "d", "Divers" );
 
 INSERT INTO postcode VALUES( "03121", "Meining" );
 INSERT INTO postcode VALUES( "53121", "Dumpeln" );
