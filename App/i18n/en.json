@@ -8,5 +8,7 @@
     "mail_service": "Service Email",
     "fullname": "Fullname",
     "address": "Address",
-    "birthdate": "Birthdate"
+    "birthdate": "Birthdate",
+    "template": "Template",
+    "nav_back": "Go Back"
 }

@@ -3,16 +3,37 @@
     border-width: 2px;
     border-style: solid;
     border-color: aquamarine;
-    min-width: 15%;
-    max-width: 15%;
-    min-height: 15%;
-    max-height: 15%;
+    box-shadow: 0px 0px 10px aquamarine;
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 100%;
+    max-height: 100%;
     padding: 20px;
     background-color: azure;
     margin: 5px;
+    font-size: large;
 }
 
 .CategoryButton:hover {
     background-color: rgb(196, 196, 196);
+    cursor: pointer;
+}
+
+.NavButton {
+    border-radius: 30px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: aquamarine;
+    box-shadow: 0px 0px 10px aquamarine;
+    padding: 10px;
+    background-color: #30d2d2;
+    color: white;
+    margin: 5px;
+    font-size: medium;
+}
+
+.NavButton:hover {
+    background-color: #168383;
+    color: white;
     cursor: pointer;
 }
