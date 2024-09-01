@@ -78,6 +78,20 @@ app.get('/student_overview', async function(request, response) {
 	}
 });
 
+app.get('/course_overview', async function(request, response) {
+
+	try {
+		await SQLDB.execute('SELECT * FROM view_course_student_amount;', [])
+		.then( async([rows,fields]) => {
+			response.render( 'course_overview', { student_data: rows } );
+		});
+	}
+	catch (e){
+		console.log( e );
+		goHome(request, response);
+	}
+});
+
 
 console.log( "[App] Application is running ..." )
 module.exports = app;

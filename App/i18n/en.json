@@ -10,5 +10,9 @@
     "address": "Address",
     "birthdate": "Birthdate",
     "template": "Template",
-    "nav_back": "Go Back"
+    "nav_back": "Go Back",
+    "course_id": "Course ID",
+    "module_name": "Module Name",
+    "professor": "Professor",
+    "amount_students": "Student Amount"
 }

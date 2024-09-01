@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="de">
+    <%- include("import.ejs") %>
+
+    <body>
+        <div class="Page">
+            <div class="PageHead">
+                <h1>Course Overview</h1>
+            </div>
+            <div class="PageContent">
+                
+                <table>
+                    <tr>
+                        <th><%= translation.course_id %></th>
+                        <th><%= translation.module_name %></th>
+                        <th><%= translation.professor %></th>
+                        <th><%= translation.amount_students %></th>
+                    </tr>
+
+                    <% if (student_data.length > 0){  %>
+                        <% student_data.forEach( function(student) { %>
+                            <tr>
+                                <td> <%= student["Course ID"] %> </td>
+                                <td> <%= student["Module Name"] %> </td>
+                                <td> <%= student["Professor"] %> </td>
+                                <td> <%= student["Amount students"] %> </td>
+                            </tr>
+                        <% }) %>
+                    <% }; %>
+                </table>
+
+                <a href="/home"> <button class="NavButton"><%= translation.nav_back %></button> </a>
+            </div>
+        </div>
+    </body>
+
+</html>
