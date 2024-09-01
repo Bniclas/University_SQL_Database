@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="de">
+    <%- include("import.ejs") %>
+
+    <body>
+        <div class="Page">
+            <div class="PageHead">
+                <h1>Course Mark Average</h1>
+            </div>
+            <div class="PageContent">
+                
+                <table>
+                    <tr>
+                        <th><%= translation.course_id %></th>
+                        <th><%= translation.average_mark %></th>
+                    </tr>
+
+                    <% if (student_data.length > 0){  %>
+                        <% student_data.forEach( function(student) { %>
+                            <tr>
+                                <td> <%= student["CourseID"] %> </td>
+                                <td> <%= student["Course_Markaverage"] %> </td>
+                            </tr>
+                        <% }) %>
+                    <% }; %>
+                </table>
+
+                <a href="/home"> <button class="NavButton"><%= translation.nav_back %></button> </a>
+            </div>
+        </div>
+    </body>
+
+</html>

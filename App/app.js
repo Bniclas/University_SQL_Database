@@ -92,6 +92,19 @@ app.get('/course_overview', async function(request, response) {
 	}
 });
 
+app.get('/course_mark_average', async function(request, response) {
+
+	try {
+		await SQLDB.execute('SELECT * FROM view_course_mark_average;', [])
+		.then( async([rows,fields]) => {
+			response.render( 'course_mark_average', { student_data: rows } );
+		});
+	}
+	catch (e){
+		console.log( e );
+		goHome(request, response);
+	}
+});
 
 console.log( "[App] Application is running ..." )
 module.exports = app;

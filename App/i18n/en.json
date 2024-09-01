@@ -1,7 +1,7 @@
 {
     "btn_coursa_data": "Show Course Data",
     "btn_student_info": "Show Student Information",
-    "btn_exams": "Show Exams",
+    "btn_course_mark_average": "Show Course Mark Average",
     "matric_num": "Matriculation Number",
     "gender": "Gender",
     "mail_private": "Private Email",
@@ -14,5 +14,6 @@
     "course_id": "Course ID",
     "module_name": "Module Name",
     "professor": "Professor",
-    "amount_students": "Student Amount"
+    "amount_students": "Student Amount",
+    "average_mark": "Mark Average"
 }
