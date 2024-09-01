@@ -65,9 +65,13 @@ app.get('/home', async function(request, response) {
 });
 
 app.get('/student_overview', async function(request, response) {
+	var page = request.query.page;
+	page = page - 1;
+	const limit = 25;
+	const lowerLimit = page * limit;
 
 	try {
-		await SQLDB.execute('SELECT * FROM view_student_information;', [])
+		await SQLDB.execute("SELECT * FROM view_student_information WHERE `Matriculation NUMBER` > ? ORDER BY `Matriculation NUMBER` ASC LIMIT 25;", [lowerLimit])
 		.then( async([rows,fields]) => {
 			response.render( 'student_overview', { student_data: rows } );
 		});
