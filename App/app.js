@@ -83,7 +83,6 @@ app.get('/student_overview', async function(request, response) {
 });
 
 app.get('/course_overview', async function(request, response) {
-
 	try {
 		await SQLDB.execute('SELECT * FROM view_course_student_amount;', [])
 		.then( async([rows,fields]) => {
@@ -116,6 +115,50 @@ app.get('/course_mark_average', async function(request, response) {
 				response.render( 'course_mark_average', { course_data : rows, chosen: false } );
 			});
 		}
+	}
+	catch (e){
+		console.log( e );
+		goHome(request, response);
+	}
+});
+
+app.get('/employee_overview', async function(request, response) {
+	var page = request.query.page;
+	page = page - 1;
+	const limit = 25;
+	const lowerLimit = page * limit;
+
+	try {
+		await SQLDB.execute(" \
+			SELECT employee_id, degree_name, firstname, surname, email_service, department_name, location_name, salary_amount, currency_symbol FROM employee \
+			JOIN person ON person.person_id = employee.fk_person \
+			JOIN department_staff ON department_staff.fk_employee = employee.employee_id \
+			JOIN department ON department.department_id = department_staff.fk_department \
+			JOIN university_locations ON university_locations.location_id = department.fk_uniloc \
+			LEFT JOIN job ON job.job_id = employee.fk_job \
+			LEFT JOIN degree ON degree.degree_id = person.fk_degree \
+			LEFT JOIN salary ON salary.salary_id = employee.fk_salary \
+			LEFT JOIN currency ON currency.currency_id = salary.fk_currency ORDER BY employee_id ASC;",
+		[lowerLimit])
+		.then( async([rows,fields]) => {
+			response.render( 'employee_overview', { employee_data: rows, chosen: false } );
+		});
+	}
+	catch (e){
+		console.log( e );
+		goHome(request, response);
+	}
+});
+
+app.get('/location_overview', async function(request, response) {
+	try {
+		await SQLDB.execute(" \
+			SELECT * FROM university_locations \
+			INNER JOIN postcode ON postcode.postcode_code = university_locations.fk_postcode", 
+		[])
+		.then( async([rows,fields]) => {
+			response.render( 'location_overview', { location_data: rows } );
+		});
 	}
 	catch (e){
 		console.log( e );

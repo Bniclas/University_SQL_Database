@@ -2,6 +2,8 @@
     "btn_coursa_data": "Show Course Data",
     "btn_student_info": "Show Student Information",
     "btn_course_mark_average": "Show Course Mark Average",
+    "btn_employee_info": "Show Employee Info",
+    "btn_locations": "Show Location Info",
     "matric_num": "Matriculation Number",
     "gender": "Gender",
     "mail_private": "Private Email",
@@ -15,5 +17,15 @@
     "module_name": "Module Name",
     "professor": "Professor",
     "amount_students": "Student Amount",
-    "average_mark": "Mark Average"
+    "average_mark": "Mark Average",
+    "employee_id": "Employee ID",
+    "surname": "Surname",
+    "firstname": "Firstname",
+    "degree": "Degree",
+    "salary": "Salary",
+    "currency": "Currency",
+    "department": "Department",
+    "location": "Location",
+    "postcode": "Postcode",
+    "city": "City"
 }

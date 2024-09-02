@@ -41,12 +41,28 @@ table {
     width:100%;
     table-layout: fixed;
     overflow-wrap: break-word;
+    border-collapse: collapse;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.247);
 }
 
-th, td {
+th {
     text-align: left;
+    padding: 12px 15px;
+    background-color: var(--basic--color);
 }
+
+td {
+    text-align: left;
+    padding: 12px 15px;
+}
+
 
 tr:nth-child(even) {
-    background-color: rgb(214, 214, 214);
+    background-color: rgb(233, 233, 233);
+    border-bottom: 2px solid var(--basic--color);
+}
+
+table a {
+    font-weight: bold;
+    color:coral;
 }

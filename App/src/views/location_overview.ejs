@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="de">
+    <%- include("import.ejs") %>
+
+    <body>
+        <div class="Page">
+            <div class="PageHead">
+                <h1>Location Overview</h1>
+            </div>
+            <div class="PageContent">
+                
+                <table>
+                    <tr>
+                        <th><%= translation.location %></th>
+                        <th><%= translation.street %></th>
+                        <th><%= translation.postcode %></th>
+                        <th><%= translation.city %></th>
+                    </tr>
+
+                    <% if (location_data.length > 0){  %>
+                        <% location_data.forEach( function(location) { %>
+                            <tr>
+                                <td> <%= location["location_name"] %> </td>
+                                <td> <%= location["street"] %> </td>
+                                <td> <%= location["fk_postcode"] %> </td>
+                                <td> <%= location["postcode_city"] %> </td>
+                            </tr>
+                        <% }) %>
+                    <% }; %>
+                </table>
+
+                <a href="/home"> <button class="NavButton"><%= translation.nav_back %></button> </a>
+            </div>
+        </div>
+    </body>
+
+</html>
