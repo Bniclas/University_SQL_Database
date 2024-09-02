@@ -82,8 +82,10 @@ INSERT INTO `university`.`module` (`module_name`, `module_ects`, `fk_moduleleade
 INSERT INTO semester VALUES( NULL, "SS", "2024-04-01", "2024-08-01" );
 INSERT INTO semester VALUES( NULL, "WS", "2024-10-01", "2025-02-01" );
 
-INSERT INTO `university`.`timeslot` (`start_at`, `end_at`) VALUES ('2024-08-10 08:00:00', '2024-08-10 10:00:00');
-INSERT INTO `university`.`timeslot` (`start_at`, `end_at`) VALUES ('2024-08-10 08:00:00', '2024-08-10 10:00:00');
+INSERT INTO `university`.`timeslot` (`start_at`, `end_at`) VALUES ('2024-11-10 08:00:00', '2024-11-10 10:00:00');
+INSERT INTO `university`.`timeslot` (`start_at`, `end_at`) VALUES ('2024-11-12 08:00:00', '2024-11-12 10:00:00');
+INSERT INTO `university`.`timeslot` (`start_at`, `end_at`) VALUES ('2024-12-10 08:00:00', '2024-12-10 10:00:00');
+INSERT INTO `university`.`timeslot` (`start_at`, `end_at`) VALUES ('2024-12-12 08:00:00', '2024-12-12 10:00:00');
 
 INSERT INTO course VALUES( NULL, 1, 1, 2 );
 INSERT INTO course VALUES( NULL, 4, 1, 3 );

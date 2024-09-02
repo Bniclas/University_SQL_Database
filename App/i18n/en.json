@@ -4,6 +4,7 @@
     "btn_course_mark_average": "Show Course Mark Average",
     "btn_employee_info": "Show Employee Info",
     "btn_locations": "Show Location Info",
+    "btn_schedule": "Next Course Sessions",
     "matric_num": "Matriculation Number",
     "gender": "Gender",
     "mail_private": "Private Email",
@@ -27,5 +28,10 @@
     "department": "Department",
     "location": "Location",
     "postcode": "Postcode",
-    "city": "City"
+    "city": "City",
+    "street": "Street",
+    "room_number": "Room",
+    "floor": "Floor",
+    "starttime": "Start",
+    "endtime": "End"
 }

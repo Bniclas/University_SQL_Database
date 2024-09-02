@@ -166,5 +166,29 @@ app.get('/location_overview', async function(request, response) {
 	}
 });
 
+app.get('/schedule_overview', async function(request, response) {
+	try {
+		await SQLDB.execute(" \
+			SELECT module_name, room_number, floor, SUBSTRING( start_at, 1, 16 ) as start_at, SUBSTRING( end_at, 1, 16 ) as end_at FROM course_session \
+			JOIN course ON course.course_id = course_session.fk_course \
+			JOIN timeslot ON timeslot.slot_id = course_session.fk_timeslot \
+			JOIN room ON room.room_id = course_session.fk_room \
+			JOIN semester ON semester.semester_id = course.fk_semester \
+			JOIN module ON module.module_id = course.fk_module \
+			JOIN employee ON employee.employee_id = course.fk_prof \
+			JOIN person ON person.person_id = employee.fk_person \
+			AND start_at > NOW();",
+		[])
+		.then( async([rows,fields]) => {
+			response.render( 'schedule_overview', { schedule_data: rows } );
+		});
+	}
+	catch (e){
+		console.log( e );
+		goHome(request, response);
+	}
+});
+
+
 console.log( "[App] Application is running ..." )
 module.exports = app;
