@@ -1,0 +1,68 @@
+h1, h2, h3, h4, h5, h6 {
+    color: var(--basic--fontcolor);
+}
+
+p {
+    color: var(--basic--fontcolor);
+}
+
+a {
+    color: var(--basic--fontcolor);
+    position: relative;
+    text-decoration: none;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 6px;
+}
+  
+/* Track */
+::-webkit-scrollbar-track {
+    border-radius: 4px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: rgb(0, 201, 236);
+    border-radius: 4px;
+}
+
+label {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    color: var(--basic--fontcolor);
+}
+
+
+table {
+    font-size: medium;
+    width:100%;
+    table-layout: fixed;
+    overflow-wrap: break-word;
+    border-collapse: collapse;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.247);
+}
+
+th {
+    text-align: left;
+    padding: 12px 15px;
+    background-color: var(--basic--color);
+}
+
+td {
+    text-align: left;
+    padding: 12px 15px;
+}
+
+
+tr:nth-child(even) {
+    background-color: rgb(233, 233, 233);
+    border-bottom: 2px solid var(--basic--color);
+}
+
+table a {
+    font-weight: bold;
+    color:coral;
+}

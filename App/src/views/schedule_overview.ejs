@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="de">
+    <%- include("import.ejs") %>
+
+    <body>
+        <div class="Page">
+            <div class="PageHead">
+                <h1>Schedule Overview</h1>
+            </div>
+            <div class="PageContent">
+                
+                <table>
+                    <tr>
+                        <th><%= translation.module_name %></th>
+                        <th><%= translation.room_number %></th>
+                        <th><%= translation.floor %></th>
+                        <th><%= translation.starttime %></th>
+                        <th><%= translation.endtime %></th>
+                    </tr>
+
+                    <% if (schedule_data.length > 0){  %>
+                        <% schedule_data.forEach( function(session) { %>
+                            <tr>
+                                <td> <%= session["module_name"] %> </td>
+                                <td> <%= session["room_number"] %> </td>
+                                <td> <%= session["floor"] %> </td>
+                                <td> <%= session["start_at"] %> </td>
+                                <td> <%= session["end_at"] %> </td>
+                            </tr>
+                        <% }) %>
+                    <% }; %>
+                </table>
+
+                <a href="/home"> <button class="NavButton"><%= translation.nav_back %></button> </a>
+            </div>
+        </div>
+    </body>
+
+</html>

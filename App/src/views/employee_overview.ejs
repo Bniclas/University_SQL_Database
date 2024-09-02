@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="de">
+    <%- include("import.ejs") %>
+
+    <body>
+        <div class="Page">
+            <div class="PageHead">
+                <h1>Employee Overview</h1>
+            </div>
+            <div class="PageContent">
+                
+                <table>
+                    <tr>
+                        <th><%= translation.employee_id %></th>
+                        <th><%= translation.degree %></th>
+                        <th><%= translation.firstname %></th>
+                        <th><%= translation.surname %></th>
+                        <th><%= translation.mail_service %></th>
+                        <th><%= translation.department %></th>
+                        <th><%= translation.location %></th>
+                        <th><%= translation.salary %></th>
+                        <th><%= translation.currency %></th>
+                    </tr>
+
+                    <% if (employee_data.length > 0){  %>
+                        <% employee_data.forEach( function(employee) { %>
+                            <tr>
+                                <td> <%= employee["employee_id"] %> </td>
+                                <td> <%= employee["degree_name"] %> </td>
+                                <td> <%= employee["firstname"] %> </td>
+                                <td> <%= employee["surname"] %> </td>
+                                <td> <%= employee["email_service"] %> </td>
+                                <td> <%= employee["department_name"] %> </td>
+                                <td> <%= employee["location_name"] %> </td>
+                                <td> <%= employee["salary_amount"] %> </td>
+                                <td> <%= employee["currency_symbol"] %> </td>
+                            </tr>
+                        <% }) %>
+                    <% }; %>
+                </table>
+
+                <a href="/home"> <button class="NavButton"><%= translation.nav_back %></button> </a>
+            </div>
+        </div>
+    </body>
+
+</html>
