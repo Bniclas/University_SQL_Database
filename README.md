@@ -1,4 +1,15 @@
+## About the project
+
+This is just a small project for me to learn SQL and managing data as well as analyse data from it.
+In addition, I want to create an frontend app as userfriendly as possible to use.
+
+> [!IMPORTANT]
+> Future updates will provide features like:
+> * Personal profile area in frontend
+> * Login form
+> * More packages to analye the data from the database
 
 ## Frontend Preview
-
-<img src="https://github.com/Bniclas/University_SQL_Database/blob/dev_branch/preview_01.png" width="50%" height="50%">
+> [!TIP]
+> This project will be updated, so the colors and other userinterface elements could be changed in design and behavior.
+<img src="https://github.com/Bniclas/University_SQL_Database/blob/dev_branch/preview_01.png">
