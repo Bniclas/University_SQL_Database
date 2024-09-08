@@ -6,9 +6,9 @@ INSERT INTO postcode VALUES( "03121", "Meining" );
 INSERT INTO postcode VALUES( "53121", "Dumpeln" );
 INSERT INTO postcode VALUES( "81121", "Fumplen" );
 
-INSERT INTO university_locations VALUES( NULL, "Campus Meining", "Heinzenstrasse 71a", "03121" );
-INSERT INTO university_locations VALUES( NULL, "Campus Dumpeln", "Rumboldstrasse 71b", "53121" );
-INSERT INTO university_locations VALUES( NULL, "Aussenstelle Dumpeln", "Kamelweg 31c", "53121" );
+INSERT INTO university_location VALUES( NULL, "Campus Meining", "Heinzenstrasse 71a", "03121" );
+INSERT INTO university_location VALUES( NULL, "Campus Dumpeln", "Rumboldstrasse 71b", "53121" );
+INSERT INTO university_location VALUES( NULL, "Aussenstelle Dumpeln", "Kamelweg 31c", "53121" );
 
 INSERT INTO room VALUES( NULL, 100, 1, 1 );
 INSERT INTO room VALUES( NULL, 200, 1, 1 );
@@ -104,10 +104,10 @@ INSERT INTO `university`.`exam` (`fk_course`, `logon_date`, `logout_date`, `max_
 INSERT INTO `university`.`exam` (`fk_course`, `logon_date`, `logout_date`, `max_points`, `fk_room`) VALUES ('3', '2024-08-10 07:50:41', '2024-08-10 07:50:44', '90', '3');
 INSERT INTO `university`.`exam` (`fk_course`, `logon_date`, `logout_date`, `max_points`, `fk_room`) VALUES ('4', '2024-08-10 07:50:41', '2024-08-10 07:50:44', '90', '4');
 
-INSERT INTO exam_result VALUES( 1, 2, 1, 85, 1.3 );
-INSERT INTO exam_result VALUES( 2, 2, 1, 80, 1.7 );
-INSERT INTO exam_result VALUES( 1, 1, 1, 85, 2.3 );
-INSERT INTO exam_result VALUES( 2, 1, 1, 81, 1.0 );
+INSERT INTO exam_result VALUES( 1, 2, 85, 1.3 );
+INSERT INTO exam_result VALUES( 2, 2, 80, 1.7 );
+INSERT INTO exam_result VALUES( 1, 1, 85, 2.3 );
+INSERT INTO exam_result VALUES( 2, 1, 81, 1.0 );
 
 
 INSERT INTO `university`.`student_course` (`fk_course`, `fk_matid`) VALUES ('1', '1');

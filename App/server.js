@@ -2,9 +2,6 @@ const http = require('http')
 const https = require('http')
 const app = require('./app')
 
-const portHTTP = 3000
-const portHTTPS = 3030
-
 var options = {
     key: "",
     cert: "",
@@ -16,7 +13,7 @@ const httpsserver = https.createServer( options, app )
 
 
 if ( httpserver != null){
-    console.log("[HTTP]> Server running")
+    console.log("[HTTP]> Server running" + process.env.PORT_HTTP)
 }
 
 if ( httpsserver != null){
@@ -24,5 +21,5 @@ if ( httpsserver != null){
 }
 
 
-httpserver.listen(portHTTP)
-httpsserver.listen(portHTTPS)
+httpserver.listen(process.env.PORT_HTTP)
+httpsserver.listen(process.env.PORT_HTTPS)

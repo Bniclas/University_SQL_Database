@@ -7,15 +7,20 @@ const path = require("path");
 const session = require("express-session");
 const url = require("url");
 const fileupload = require("express-fileupload");
-
-const database = require( path.join(__dirname, '/src/database/database_init.js') );
 const { isArray } = require("util");
-const SQLDB = database.SQLDB;
+
 const i18n = require("i18n-express");
+const helmet = require('helmet');
+const { rateLimit } = require('express-rate-limit');
 const cookieParser = require('cookie-parser');
 const bodyParser  = require('body-parser');
 const compression = require("compression");
 
+const database = require( path.join(__dirname, '/src/dataservice/database_init.js') );
+const login = require( path.join(__dirname, '/src/dataservice/login.js') );
+const user = require( path.join(__dirname, '/src/dataservice/user.js') );
+
+const SQLDB = database.SQLDB;
 database.InitDatabase();
 
 /**
@@ -32,25 +37,55 @@ const app = express();
 /**
  * Setting up the middleware
  */
-app.use(session({
+app.use( session({
 	secret: 'secret',
 	resave: true,
 	saveUninitialized: true
-}));
-app.use(compression());
-app.use(fileupload());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+}) );
+app.use( compression() );
+app.use( fileupload() );
+app.use( express.json() );
+app.use( express.urlencoded({ extended: true }) );
 app.use( express.static( __dirname ) );
 app.use( express.static( __dirname + "/public") );
 app.use(i18n({
 	translationsPath: path.join(__dirname, 'i18n'), // <--- use here. Specify translations files path.
-	siteLangs: ["en","es"],
+	siteLangs: ["en","de"],
 	textsVarName: 'translation',
 	browserEnable: false
 }));
-app.set('views', path.join(__dirname, '/src/views') );
-app.set('view engine', 'ejs');
+app.use( helmet() );
+const limiter = rateLimit({
+	windowMs: 15 * 60 * 1000, // 15 minutes
+	limit: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes).
+	standardHeaders: 'draft-7', // draft-6: `RateLimit-*` headers; draft-7: combined `RateLimit` header
+	legacyHeaders: false, // Disable the `X-RateLimit-*` headers.
+})
+app.use(limiter)
+
+
+app.set( 'views', path.join(__dirname, '/src/views') );
+app.set( 'view engine', 'ejs' );
+
+const createMessage = async( type, text ) => {
+	const _message = {
+		type: type,
+		text: text
+	}
+
+	return _message;
+}
+
+const mountData = async( req, res, _others ) => {
+	var data = {
+		loginstatus: await user.getLoginStatus( req ),
+		userid: await user.getUserID( req ),
+		message: _others.message || 'undefined',
+	};
+
+	Object.assign( data, _others );
+	return data;
+}
 
 const goHome = async( req, res ) => {
 	res.redirect("/home");
@@ -61,7 +96,22 @@ app.get('/', async function(request, response) {
 });
 
 app.get('/home', async function(request, response) {
-	response.render( 'home', {} );
+	response.render( 'home', await mountData( request, response, {} ) );
+});
+
+app.get('/login', async function(request, response) {
+	response.render( 'login_form', await mountData( request, response, {} ) );
+});
+
+app.get('/logout', async function(request, response) {
+	login.doLogout( request, response );
+});
+
+app.post('/login', async function( request, response ) {
+	const input_email = request.body.form_input_email;
+	const input_password = request.body.form_input_password;
+
+	await login.checkLogin( request, response, input_email, input_password );
 });
 
 app.get('/student_overview', async function(request, response) {
@@ -73,7 +123,7 @@ app.get('/student_overview', async function(request, response) {
 	try {
 		await SQLDB.execute("SELECT * FROM view_student_information WHERE `Matriculation NUMBER` > ? ORDER BY `Matriculation NUMBER` ASC LIMIT 25;", [lowerLimit])
 		.then( async([rows,fields]) => {
-			response.render( 'student_overview', { student_data: rows } );
+			response.render( 'student_overview', await mountData( request, response, {student_data: rows} ) );
 		});
 	}
 	catch (e){
@@ -86,7 +136,7 @@ app.get('/course_overview', async function(request, response) {
 	try {
 		await SQLDB.execute('SELECT * FROM view_course_student_amount;', [])
 		.then( async([rows,fields]) => {
-			response.render( 'course_overview', { course_data: rows } );
+			response.render( 'course_overview', await mountData( request, response, { course_data: rows } ) );
 		});
 	}
 	catch (e){
@@ -99,20 +149,25 @@ app.get('/course_mark_average', async function(request, response) {
 	const courseid = request.query.courseid;
 	try {
 		if ( courseid ) {
-			await SQLDB.execute('SELECT * FROM view_course_mark_average WHERE courseid = ?', [courseid])
-			.then( async([rows,fields]) => {
-				if ( rows.length == 0 ){
-					goHome(request, response);
-				}
-				else {
-					response.render( 'course_mark_average', { course_data : rows, chosen: true } );
-				}
-			});
+			const [course_data, _fields] = await SQLDB.execute('SELECT * FROM view_course_mark_average WHERE courseid = ?', [courseid]);
+
+			if ( course_data.length == 0 ){
+				goHome(request, response);
+			}
+
+			const [marks_data, __fields] = await SQLDB.execute(" \
+				SELECT reached_mark, COUNT(*) as count FROM exam_result \
+				JOIN exam ON exam.exam_nr = exam_result.fk_exam \
+				WHERE fk_course = ? \
+				GROUP BY reached_mark"
+			,[courseid]);
+
+			response.render( 'course_mark_average', await mountData( request, response, { course_data : course_data[0], mark_data: marks_data, chosen: true } ) );
 		}
 		else {
 			await SQLDB.execute('SELECT * FROM view_course_mark_average;', [])
 			.then( async([rows,fields]) => {
-				response.render( 'course_mark_average', { course_data : rows, chosen: false } );
+				response.render( 'course_mark_average', await mountData( request, response, { course_data : rows, chosen: false } ) );
 			});
 		}
 	}
@@ -134,14 +189,14 @@ app.get('/employee_overview', async function(request, response) {
 			JOIN person ON person.person_id = employee.fk_person \
 			JOIN department_staff ON department_staff.fk_employee = employee.employee_id \
 			JOIN department ON department.department_id = department_staff.fk_department \
-			JOIN university_locations ON university_locations.location_id = department.fk_uniloc \
+			JOIN university_location ON university_location.location_id = department.fk_uniloc \
 			LEFT JOIN job ON job.job_id = employee.fk_job \
 			LEFT JOIN degree ON degree.degree_id = person.fk_degree \
 			LEFT JOIN salary ON salary.salary_id = employee.fk_salary \
 			LEFT JOIN currency ON currency.currency_id = salary.fk_currency ORDER BY employee_id ASC;",
 		[lowerLimit])
 		.then( async([rows,fields]) => {
-			response.render( 'employee_overview', { employee_data: rows, chosen: false } );
+			response.render( 'employee_overview', await mountData( request, response, { employee_data: rows, chosen: false } ) );
 		});
 	}
 	catch (e){
@@ -153,11 +208,11 @@ app.get('/employee_overview', async function(request, response) {
 app.get('/location_overview', async function(request, response) {
 	try {
 		await SQLDB.execute(" \
-			SELECT * FROM university_locations \
-			INNER JOIN postcode ON postcode.postcode_code = university_locations.fk_postcode", 
+			SELECT * FROM university_location \
+			INNER JOIN postcode ON postcode.postcode_code = university_location.fk_postcode", 
 		[])
 		.then( async([rows,fields]) => {
-			response.render( 'location_overview', { location_data: rows } );
+			response.render( 'location_overview', await mountData( request, response, { location_data: rows } ) );
 		});
 	}
 	catch (e){
@@ -169,7 +224,7 @@ app.get('/location_overview', async function(request, response) {
 app.get('/schedule_overview', async function(request, response) {
 	try {
 		await SQLDB.execute(" \
-			SELECT module_name, room_number, floor, SUBSTRING( start_at, 1, 16 ) as start_at, SUBSTRING( end_at, 1, 16 ) as end_at FROM course_session \
+			SELECT module_name, room_number, floor, SUBSTRING( start_at, 1, 16 ) as start_at, SUBSTRING( end_at, 1, 16 ) as end_at, location_name, location_id FROM course_session \
 			JOIN course ON course.course_id = course_session.fk_course \
 			JOIN timeslot ON timeslot.slot_id = course_session.fk_timeslot \
 			JOIN room ON room.room_id = course_session.fk_room \
@@ -177,10 +232,11 @@ app.get('/schedule_overview', async function(request, response) {
 			JOIN module ON module.module_id = course.fk_module \
 			JOIN employee ON employee.employee_id = course.fk_prof \
 			JOIN person ON person.person_id = employee.fk_person \
-			AND start_at > NOW();",
+			JOIN university_location ON university_location.location_id = room.fk_uniloc \
+			WHERE start_at > NOW();",
 		[])
 		.then( async([rows,fields]) => {
-			response.render( 'schedule_overview', { schedule_data: rows } );
+			response.render( 'schedule_overview', await mountData( request, response, { schedule_data: rows } ) );
 		});
 	}
 	catch (e){
@@ -189,6 +245,46 @@ app.get('/schedule_overview', async function(request, response) {
 	}
 });
 
+app.get("/myprofile", async function( request, response ) {
+	const personid = await user.getUserID( request );
+
+	if ( personid == null ){
+		goHome( request, response );
+		return;
+	}
+
+	var [mydata, fields] = await SQLDB.execute("SELECT * FROM view_person_essential WHERE person_id = ?", [ personid ]);
+	var [mycourses, fields] = await SQLDB.execute("SELECT * FROM view_person_course_essential WHERE person_id = ?", [ personid ]);
+
+	response.render( 'my_profile', await mountData( request, response, { mydata: mydata[0], mycourses: mycourses } ) );
+})
+
+app.get("/create_person", async function( request, response ) {
+/*	const val = await user.createUser(
+		"m", 
+		"admin@me.de", 
+		"admin@service.de", 
+		"123", 
+		"Amara", 
+		"Amstrand", 
+		"26.02.2004", 
+		"01231", 
+		"Himalaya", 
+		"Gebirgsstrasse"
+	)
+
+	var messageType = "success";
+	var messageText = "Created Test User!";
+
+	if ( val === undefined || val === false ){
+		messageType = "alert";
+		messageText = "Error: Test user could not be created!";
+	}
+
+	response.render( 'home', await mountData( request, response, { message: await createMessage(messageType, messageText) } ) );*/
+
+	response.render( 'create_person_form', await mountData( request, response, {  } ) );
+})
 
 console.log( "[App] Application is running ..." )
 module.exports = app;

@@ -4,3 +4,6 @@ node_modules/
 # Ignoring local avatars or backgrounds
 public/avatars/
 public/images/backgrounds/
+
+#Ignoring other files
+.env

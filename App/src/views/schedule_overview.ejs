@@ -5,7 +5,9 @@
     <body>
         <div class="Page">
             <div class="PageHead">
-                <h1>Schedule Overview</h1>
+                <div class="PageHeadContainer">
+                    <h1>Schedule Overview</h1>
+                </div>
             </div>
             <div class="PageContent">
                 
@@ -14,6 +16,7 @@
                         <th><%= translation.module_name %></th>
                         <th><%= translation.room_number %></th>
                         <th><%= translation.floor %></th>
+                        <th><%= translation.location %></th>
                         <th><%= translation.starttime %></th>
                         <th><%= translation.endtime %></th>
                     </tr>
@@ -24,6 +27,7 @@
                                 <td> <%= session["module_name"] %> </td>
                                 <td> <%= session["room_number"] %> </td>
                                 <td> <%= session["floor"] %> </td>
+                                <td> <%= session["location_name"] %> </td>
                                 <td> <%= session["start_at"] %> </td>
                                 <td> <%= session["end_at"] %> </td>
                             </tr>
@@ -31,7 +35,7 @@
                     <% }; %>
                 </table>
 
-                <a href="/home"> <button class="NavButton"><%= translation.nav_back %></button> </a>
+                <a href="/home"> <button class="StandardButton"><%= translation.nav_back %></button> </a>
             </div>
         </div>
     </body>

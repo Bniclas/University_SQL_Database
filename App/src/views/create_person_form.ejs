@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="de">
+    <%- include("import.ejs") %>
+
+    <body>
+        <div class="Page">
+            <div class="PageContent">
+                <form name="createPersonForm" action="/create_person" method="post" class="createPersonForm">
+                    <h1> <%=translation.btn_create_person%></h1>
+                    <br>
+                    <label for="form_input_firstname"> 
+                        <%= translation.firstname %>
+                    </label>
+                    <input type="text" id="form_input_firstname" name="form_input_firstname" class="inputfield" autocomplete="off" role="presentation" autofill="off" style="width: 40%;">
+
+                    <br>
+                    <label for="form_input_surname"> 
+                        <%= translation.surname %>
+                    </label>
+                    <input type="text" id="form_input_surname" name="form_input_surname" class="inputfield" autocomplete="off" role="presentation" autofill="off" style="width: 40%;">
+
+                    <br>
+                    <label for="form_input_private_mail"> 
+                        <%= translation.mail_private %>
+                    </label>
+                    <input type="text" id="form_input_private_mail" name="form_input_private_mail" class="inputfield" autocomplete="off" role="presentation" autofill="off" style="width: 60%;">
+                   
+                    <br>
+                    <label for="form_input_service_mail"> 
+                        <%= translation.mail_service %>
+                    </label>
+                    <input type="text" id="form_input_service_mail" name="form_input_service_mail" class="inputfield" autocomplete="off" role="presentation" autofill="off" style="width: 60%;">
+
+                    <br>
+                    <label for="form_input_postcode"> 
+                        <%= translation.postcode %>
+                    </label>
+                    <input type="text" id="form_input_postcode" name="form_input_postcode" class="inputfield" autocomplete="off" role="presentation" autofill="off" style="width: 30%;">
+
+                    <br>
+                    <label for="form_input_street"> 
+                        <%= translation.street %>
+                    </label>
+                    <input type="text" id="form_input_street" name="form_input_street" class="inputfield" autocomplete="off" role="presentation" autofill="off" style="width: 60%;">
+                    
+                    <br>
+                    <button type="submit" class="StandardButton" util="done"> <%= translation.btn_create_person %> </button>
+                    <br>
+
+                    <button class="StandardButton" onclick="history.back()"><%= translation.nav_back %></button>
+                </form>
+            </div>
+        </div>
+    </body>
+
+</html>

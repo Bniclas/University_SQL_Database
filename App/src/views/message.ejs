@@ -1,0 +1,20 @@
+<script>
+    setTimeout( ()=>{
+        const messageBoxes = document.getElementsByClassName("MessageBox");
+
+        for( let i=0; i<messageBoxes.length; i++ ){
+            let msgBox = messageBoxes[i];
+            msgBox.style.display = 'none';
+        }
+    }, 3000)
+</script>
+
+<% if ( message !== 'undefined' ) { %>
+    <% var col = "red" %>
+    <% if ( message.type == "alert" ) { col = "red" }; %>
+    <% if ( message.type == "warn" ) { col = "orange" }; %>
+    <% if ( message.type == "info" ) { col = "blue" }; %>
+    <% if ( message.type == "success" ) { col = "green" }; %>
+
+    <div class="MessageBox" style="background-color: <%= col %>;"> <%= message.text %> </div>
+<% }; %>

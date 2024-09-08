@@ -5,16 +5,32 @@
     <body>
         <div class="Page">
             <div class="PageHead">
-                <h1>Course Mark Average</h1>
+                <div class="PageHeadContainer">
+                    <h1>Course Mark Average</h1>
+                </div>
             </div>
             <div class="PageContent">
                 <% if (chosen) { %>
+                    <h3>General Data</h3>
                     <%= translation.course_id %> :
-                    <%= course_data[0].CourseID %>
+                    <%= course_data.CourseID %>
                     <br>
 
                     <%= translation.average_mark %> :
-                    <%= course_data[0].Course_Markaverage %>
+                    <%= course_data.Course_Markaverage %>
+                    <br>
+                    <h3>Marks</h3>
+                    <% if (mark_data.length > 0){  %>
+                        <% mark_data.forEach( function(mark) { %>
+                            <% var colorMarkClass = "MarkRed" %>
+                            <% if ( parseFloat(mark["reached_mark"]) <= 4.0 ) { %>
+                                <% colorMarkClass = "MarkGreen" %>
+                            <% }; %>
+                            <b class="<%= colorMarkClass %>"><%= parseFloat(mark["reached_mark"]).toFixed(1) %> : </b> <%= mark["count"] %>
+                            <br>
+                        <% }) %>
+                    <% }; %>
+                    <br>
                     <br>
                 <% } else { %>
                     <table>
@@ -34,7 +50,7 @@
                     </table>
                 <% } %>
 
-                <button class="NavButton" onclick="history.back()"><%= translation.nav_back %></button>
+                <button class="StandardButton" onclick="history.back()"><%= translation.nav_back %></button>
             </div>
         </div>
     </body>

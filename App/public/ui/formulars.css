@@ -1,0 +1,29 @@
+.loginform {
+    display: flex;
+    width: 40%;
+    border-color: var(--basic--color);
+    border-radius: 30px;
+    border-style: solid;
+    margin: 2%;
+    position: relative;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    padding: 8%;
+    flex-direction: column;
+}
+
+.createPersonForm {
+    display: flex;
+    width: 40%;
+    border-color: var(--basic--color);
+    border-radius: 30px;
+    border-style: solid;
+    margin: 2%;
+    position: relative;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    padding: 8%;
+    flex-direction: column;
+}

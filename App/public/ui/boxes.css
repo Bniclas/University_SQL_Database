@@ -1,0 +1,14 @@
+.MessageBox {
+    background-color: var(--color--msg--red);
+    color: white;
+    padding: 20px;
+    margin: 5px;
+    border-radius: 10px;
+    font-weight: bold;
+    position: fixed; 
+    z-index: 1000;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -20%);
+}

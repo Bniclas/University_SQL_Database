@@ -1,10 +1,13 @@
 {
+    "app_title": "University SQL",
     "btn_coursa_data": "Show Course Data",
     "btn_student_info": "Show Student Information",
     "btn_course_mark_average": "Show Course Mark Average",
     "btn_employee_info": "Show Employee Info",
     "btn_locations": "Show Location Info",
     "btn_schedule": "Next Course Sessions",
+    "btn_myprofile": "My Profile",
+    "btn_create_person": "Create a new Person",
     "matric_num": "Matriculation Number",
     "gender": "Gender",
     "mail_private": "Private Email",
@@ -33,5 +36,12 @@
     "room_number": "Room",
     "floor": "Floor",
     "starttime": "Start",
-    "endtime": "End"
+    "endtime": "End",
+    "btn_login": "Login",
+    "btn_logout": "Logout",
+    "lbl_email": "Email",
+    "lbl_password": "Password",
+    "semester": "Semester",
+    "ects": "ECTS",
+    "mark": "Mark"
 }

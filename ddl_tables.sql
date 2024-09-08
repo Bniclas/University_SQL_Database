@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS postcode (
 	PRIMARY KEY ( postcode_code )
 );
 
-CREATE TABLE IF NOT EXISTS university_locations (
+CREATE TABLE IF NOT EXISTS university_location (
 	location_id INT UNSIGNED AUTO_INCREMENT,
 	location_name NVARCHAR( 100 ) NOT NULL,
 	street NVARCHAR( 60 ) NOT NULL,
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS room (
 	floor TINYINT UNSIGNED NOT NULL,
 	fk_uniloc INT UNSIGNED NOT NULL,
 	PRIMARY KEY (room_id),
-	FOREIGN KEY (fk_uniloc) REFERENCES university_locations(location_id)
+	FOREIGN KEY (fk_uniloc) REFERENCES university_location(location_id)
 );
 
 CREATE TABLE IF NOT EXISTS timeslot (
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS department (
 	department_name NVARCHAR( 100 ) NOT NULL,
 	fk_uniloc INT UNSIGNED NOT NULL,
 	PRIMARY KEY ( department_id ),
-	FOREIGN KEY ( fk_uniloc ) REFERENCES university_locations( location_id )
+	FOREIGN KEY ( fk_uniloc ) REFERENCES university_location( location_id )
 );
 
 CREATE TABLE IF NOT EXISTS job (
@@ -212,10 +212,17 @@ CREATE TABLE IF NOT EXISTS exam (
 CREATE TABLE IF NOT EXISTS exam_result (
 	fk_exam INT UNSIGNED NOT NULL,
 	fk_matid INT UNSIGNED NOT NULL,
-	attempt ENUM( "1", "2", "3" ) NOT NULL,
 	reached_points TINYINT UNSIGNED,
 	reached_mark DOUBLE(2,1),
 	FOREIGN KEY ( fk_exam ) REFERENCES exam( exam_nr ),
 	FOREIGN KEY ( fk_matid ) REFERENCES student( mat_id ),
 	CONSTRAINT check_mark CHECK( reached_mark >= 1.0 AND reached_mark <= 5.0 )
+);
+
+CREATE TABLE IF NOT EXISTS student_exam_attempt (
+	fk_exam INT UNSIGNED NOT NULL,
+	fk_matid INT UNSIGNED NOT NULL, 
+	attempt ENUM( "1", "2", "3" ) NOT NULL,
+	FOREIGN KEY ( fk_exam ) REFERENCES exam( exam_nr ),
+	FOREIGN KEY ( fk_matid ) REFERENCES student( mat_id )
 );

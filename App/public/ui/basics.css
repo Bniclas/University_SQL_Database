@@ -35,17 +35,34 @@ label {
     color: var(--basic--fontcolor);
 }
 
+@media (max-width:1280px)  { 
+    table {
+        font-size: small;
+        width:100%;
+        table-layout: fixed;
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+        border-collapse: collapse;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.247);
+    }
+}
 
-table {
-    font-size: medium;
-    width:100%;
-    table-layout: fixed;
-    overflow-wrap: break-word;
-    border-collapse: collapse;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.247);
+@media (min-width:1281px) {
+    table {
+        font-size: medium;
+        display: inline-table;
+        width:100%;
+        table-layout: fixed;
+        overflow-wrap: break-word;
+        border-collapse: collapse;
+        white-space: normal;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.247);
+    }
 }
 
 th {
+    color: white;
     text-align: left;
     padding: 12px 15px;
     background-color: var(--basic--color);

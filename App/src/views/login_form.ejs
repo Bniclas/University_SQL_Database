@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="de">
+    <%- include("import.ejs") %>
+
+    <head>
+        <script>
+            $('form').submit(function (e) {
+                e.preventDefault(e);
+
+                $.ajax({
+                    url: $('form').attr('action'),
+                    type: 'POST',
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    success: function (data) {
+                        window.location = "/home"
+                    }
+                });
+            });
+        </script>
+    </head>
+
+    <body>
+        <div class="Page">
+            <div class="PageContent">
+                <form action="/login" method="post" class="loginform">
+                    <h1> <%=translation.app_title%></h1>
+                    <label for="form_input_username"> 
+                        <%= translation.lbl_email %>
+                    </label>
+                    <input type="text" id="form_input_email" name="form_input_email" class="inputfield" autocomplete="off" role="presentation" autofill="off">
+                    <br>
+                    <label for="form_input_password"> 
+                        <%= translation.lbl_password %>
+                    </label>
+                    <input type="password" id="form_input_password" name="form_input_password" class="inputfield" autocomplete="off" role="presentation" autofill="off">
+                    <br>
+                    <button type="submit" class="StandardButton" util="done"> <%= translation.btn_login %> </button>
+                    <br>
+                    <button class="StandardButton" onclick="history.back()"><%= translation.nav_back %></button>
+                </form>
+            </div>
+        </div>
+    </body>
+
+</html>
