@@ -49,15 +49,9 @@ const checkPassword = async( request, response, personid, givenPassword ) => {
     if (rows.length > 0) {
         await bcrypt.compare(givenPassword, rows[0]["password"], async function(error, result){
             if ( result == true ){
-                const _user = {
-                    userid: personid
-                };
-                const accessToken = jwt.sign( _user, process.env.SECRET_TOKEN );
-                response.json( accessToken );
-
                 request.session.userid = personid;
                 request.session.loggedin = true;
-                //response.redirect("/home");
+                response.redirect("/home");
             }
             else {
                 response.redirect("/home");
