@@ -12,4 +12,4 @@ In addition, I want to create an frontend app as userfriendly as possible to use
 ## Frontend Preview
 > [!TIP]
 > This project will be updated, so the colors and other userinterface elements could be changed in design and behavior.
-<img src="https://github.com/Bniclas/University_SQL_Database/blob/dev_branch/preview_01.png">
+<img src="https://github.com/Bniclas/University_SQL_Database/blob/main/preview_01.png?raw=true">
