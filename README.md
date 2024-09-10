@@ -8,6 +8,7 @@ In addition, I want to create an frontend app as userfriendly as possible to use
 > * Personal profile area in frontend
 > * Login form
 > * More packages to analye the data from the database
+> * Fixing security vulnerabilities
 
 ## Frontend Preview
 > [!TIP]
