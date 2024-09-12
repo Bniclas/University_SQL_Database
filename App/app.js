@@ -38,9 +38,14 @@ const app = express();
  * Setting up the middleware
  */
 app.use( session({
-	secret: 'secret',
-	resave: true,
-	saveUninitialized: true
+	secret: process.env.SECRET_KEY, // A secret key used to sign the session ID cookie
+	resave: false, // Forces the session to be saved back to the session store
+	saveUninitialized: false, // Forces a session that is "uninitialized" to be saved to the store
+	cookie: {
+	  	maxAge: 3600000, // Sets the cookie expiration time in milliseconds (1 hour here)
+	  	httpOnly: true, // Reduces client-side script control over the cookie
+	  	secure: ( process.env.HTTPS_ONLY_SESSION == "true" || process.env.HTTPS_ONLY == "true"), // Ensures cookies are only sent over HTTPS
+	}
 }) );
 app.use( compression() );
 app.use( fileupload() );
@@ -55,14 +60,28 @@ app.use(i18n({
 	browserEnable: false
 }));
 app.use( helmet() );
-const limiter = rateLimit({
+app.use( rateLimit({
 	windowMs: 15 * 60 * 1000, // 15 minutes
 	limit: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes).
 	standardHeaders: 'draft-7', // draft-6: `RateLimit-*` headers; draft-7: combined `RateLimit` header
 	legacyHeaders: false, // Disable the `X-RateLimit-*` headers.
-})
-app.use(limiter)
+}) );
 
+const requireAuth = ( req, res, next ) => {
+	if ( req.url === "/login" ) {
+		next();
+	}
+	else {
+		if ( !req.session.hasAuth ){
+			res.redirect("/login");
+		}
+		else {
+			next();
+		}
+	}
+}
+
+app.use( requireAuth );
 
 app.set( 'views', path.join(__dirname, '/src/views') );
 app.set( 'view engine', 'ejs' );
@@ -285,6 +304,41 @@ app.get("/create_person", async function( request, response ) {
 
 	response.render( 'create_person_form', await mountData( request, response, {  } ) );
 })
+
+app.post("/create_person", async function( request, response ) {
+	const sFirstname = request.body.form_input_firstname;
+	const sSurname = request.body.form_input_surname;
+	const sPrivateEmail = request.body.form_input_private_mail;
+	const sServiceEmail = request.body.form_input_service_mail;
+	const sCountry = request.body.form_input_country;
+	const sPostcode = request.body.form_input_postcode;
+	const sStreet = request.body.form_input_street;
+	const dBirthdate = request.body.form_input_birthdate;
+
+	const val = await user.createUser(
+		"d", 
+		sPrivateEmail, 
+		sServiceEmail, 
+		"123", 
+		sFirstname, 
+		sSurname, 
+		dBirthdate, 
+		sPostcode, 
+		sCountry, 
+		sStreet
+	)
+
+	var messageType = "success";
+	var messageText = "Created Test User!";
+
+	if ( val === undefined || val === false ){
+		messageType = "alert";
+		messageText = "Error: Test user could not be created!";
+	}
+
+	response.render( 'home', await mountData( request, response, { message: await createMessage(messageType, messageText) } ) );
+})
+	
 
 console.log( "[App] Application is running ..." )
 module.exports = app;

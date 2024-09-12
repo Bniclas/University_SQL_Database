@@ -1,11 +1,10 @@
 const db = require("./database_config").SQLDB;
 const hashSaltRounds = require("./database_config").hashSaltRounds;
 const bcrypt = require("bcrypt");
-const jwt = require('jsonwebtoken');
 
 
 const getLoginStatus = async ( req ) => {
-    return ( req.session.loggedin || false );
+    return ( req.session.hasAuth || false );
 }
 
 const getUserID = async( req ) => {
@@ -50,7 +49,7 @@ const checkPassword = async( request, response, personid, givenPassword ) => {
         await bcrypt.compare(givenPassword, rows[0]["password"], async function(error, result){
             if ( result == true ){
                 request.session.userid = personid;
-                request.session.loggedin = true;
+                request.session.hasAuth = true;
                 response.redirect("/home");
             }
             else {

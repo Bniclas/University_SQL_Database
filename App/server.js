@@ -7,19 +7,20 @@ var options = {
     cert: "",
 };
 
+if ( process.env.HTTPS_ONLY == "true" ){
+    const httpsserver = https.createServer( options, app );
 
-const httpserver = http.createServer(app)
-const httpsserver = https.createServer( options, app )
+    httpsserver.listen(process.env.PORT_HTTPS);
 
-
-if ( httpserver != null){
-    console.log("[HTTP]> Server running" + process.env.PORT_HTTP)
+    console.log( "[HTTPS]> Server running on " + process.env.PORT_HTTPS );
 }
+else {
+    const httpserver = http.createServer(app);
+    const httpsserver = https.createServer( options, app );
 
-if ( httpsserver != null){
-    console.log("[HTTPS]> Server running")
+    httpserver.listen(process.env.PORT_HTTP);
+    httpsserver.listen(process.env.PORT_HTTPS);
+
+    console.log( "[HTTP]> Server running on " + process.env.PORT_HTTP );
+    console.log( "[HTTPS]> Server running on " + process.env.PORT_HTTPS );
 }
-
-
-httpserver.listen(process.env.PORT_HTTP)
-httpsserver.listen(process.env.PORT_HTTPS)

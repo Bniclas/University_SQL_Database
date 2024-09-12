@@ -43,5 +43,6 @@
     "lbl_password": "Password",
     "semester": "Semester",
     "ects": "ECTS",
-    "mark": "Mark"
+    "mark": "Mark",
+    "country": "Country"
 }
