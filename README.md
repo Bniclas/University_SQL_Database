@@ -1,7 +1,7 @@
 ## About the project
 
 This is just a small project for me to learn SQL and managing data as well as analyse data from it.
-In addition, I want to create an frontend app as userfriendly as possible to use.
+In addition, I want to create an app as userfriendly as possible to use.
 
 > [!IMPORTANT]
 > Future updates will provide features like:
