@@ -2,7 +2,6 @@ const db = require("./database_config").SQLDB;
 const hashSaltRounds = require("./database_config").hashSaltRounds;
 const bcrypt = require("bcrypt");
 
-
 const getLoginStatus = async ( req ) => {
     return ( req.session.hasAuth || false );
 }
@@ -53,14 +52,16 @@ const checkPassword = async( request, response, personid, givenPassword ) => {
                 response.redirect("/home");
             }
             else {
-                response.redirect("/home");
+                response.redirect("/login");
             }
         });
     }	
+    else {
+        response.redirect("/login");
+    }
 }
 
 const createUser = async( 
-    gender, 
     email_private, 
     email_service, 
     password, 
@@ -75,10 +76,10 @@ const createUser = async(
     if ( passwordHash ) {
         try {
             const [rows, fields] = await db.execute( "insert into person \
-            (gender, email_private, email_service, password, firstname, surname, birthdate, postcode, location, street) \
-            values( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )", 
+            (email_private, email_service, password, firstname, surname, birthdate, postcode, location, street) \
+            values( ?, ?, ?, ?, ?, ?, ?, ?, ? )", 
             [
-                gender, email_private, email_service, passwordHash, firstname, surname, birthdate, postcode, location, street
+                email_private, email_service, passwordHash, firstname, surname, birthdate, postcode, location, street
             ]);
             
             return true;
@@ -93,4 +94,30 @@ const createUser = async(
     }
 }
 
-module.exports = { getLoginStatus, getUserID, userExistsByID, userExistsByEmail, checkPassword, createUser };
+const createAdminUser = async() => {
+    try {
+        if( process.env.TEST_ACTIVE == "true" ) {
+            const privatemail = "admin@me.de";
+            const [rows, fields] = await db.execute("SELECT password FROM person WHERE email_private = ?", [ privatemail ]);
+            if ( rows.length > 0 ){
+                return;
+            }
+            await createUser(
+                "admin@me.de", 
+                "admin@service.de", 
+                "123", 
+                "Admin", 
+                "Nistrator", 
+                "1000-01-01", 
+                "01234", 
+                "Admintown", 
+                "Adminstreet"
+            )
+        }
+    }
+    catch( e ) {
+        console.log( e );
+    }
+}
+
+module.exports = { getLoginStatus, getUserID, userExistsByID, userExistsByEmail, checkPassword, createUser, createAdminUser };

@@ -22,6 +22,7 @@ const user = require( path.join(__dirname, '/src/dataservice/user.js') );
 
 const SQLDB = database.SQLDB;
 database.InitDatabase();
+user.createAdminUser();
 
 /**
  * Routes
@@ -279,29 +280,6 @@ app.get("/myprofile", async function( request, response ) {
 })
 
 app.get("/create_person", async function( request, response ) {
-/*	const val = await user.createUser(
-		"m", 
-		"admin@me.de", 
-		"admin@service.de", 
-		"123", 
-		"Amara", 
-		"Amstrand", 
-		"26.02.2004", 
-		"01231", 
-		"Himalaya", 
-		"Gebirgsstrasse"
-	)
-
-	var messageType = "success";
-	var messageText = "Created Test User!";
-
-	if ( val === undefined || val === false ){
-		messageType = "alert";
-		messageText = "Error: Test user could not be created!";
-	}
-
-	response.render( 'home', await mountData( request, response, { message: await createMessage(messageType, messageText) } ) );*/
-
 	response.render( 'create_person_form', await mountData( request, response, {  } ) );
 })
 
@@ -314,12 +292,12 @@ app.post("/create_person", async function( request, response ) {
 	const sPostcode = request.body.form_input_postcode;
 	const sStreet = request.body.form_input_street;
 	const dBirthdate = request.body.form_input_birthdate;
+	const password = sFirstname + sSurname;
 
 	const val = await user.createUser(
-		"d", 
 		sPrivateEmail, 
 		sServiceEmail, 
-		"123", 
+		password, 
 		sFirstname, 
 		sSurname, 
 		dBirthdate, 
@@ -329,7 +307,7 @@ app.post("/create_person", async function( request, response ) {
 	)
 
 	var messageType = "success";
-	var messageText = "Created Test User!";
+	var messageText = "Success: Created new Person!";
 
 	if ( val === undefined || val === false ){
 		messageType = "alert";
