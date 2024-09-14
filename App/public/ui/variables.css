@@ -3,7 +3,8 @@
     --header-height: 5%;
     --footer-height: 5%;
     --basic--color: rgb(0, 201, 236);
-    --basic--fontcolor: rgb(0, 0, 0);
+    --basic--fontcolor: rgb(30, 30, 30);
+    --basic--fontcolor--pagehead: rgb(255, 255, 255);
     --color--msg--red: red;
     --color--msg--orange: orange;
     --color--msg--blue: blue;

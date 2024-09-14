@@ -3,6 +3,7 @@
  */
 
 const express = require("express");
+const { check } = require('express-validator');
 const path = require("path");
 const session = require("express-session");
 const url = require("url");
@@ -69,12 +70,13 @@ app.use( rateLimit({
 	legacyHeaders: false, // Disable the `X-RateLimit-*` headers.
 }) );
 
-const requireAuth = ( req, res, next ) => {
+const requireAuth = async ( req, res, next ) => {
 	if ( req.url === "/login" ) {
 		next();
 	}
 	else {
 		if ( !req.session.hasAuth ){
+			await message_service.setMessage( req, "alert", "You are not authorized! Please login." );
 			res.redirect("/login");
 		}
 		else {
@@ -121,7 +123,10 @@ app.get('/logout', async function(request, response) {
 	login.doLogout( request, response );
 });
 
-app.post('/login', async function( request, response ) {
+app.post('/login', [
+	check('form_input_email').escape(),
+	check('form_input_password').escape(),
+  ], async function( request, response ) {
 	const input_email = request.body.form_input_email;
 	const input_password = request.body.form_input_password;
 
@@ -277,7 +282,16 @@ app.get("/create_person", async function( request, response ) {
 	response.render( 'create_person_form', await mountData( request, response, {  } ) );
 })
 
-app.post("/create_person", async function( request, response ) {
+app.post("/create_person", [
+	check('form_input_firstname').escape(),
+	check('form_input_surname').escape(),
+	check('form_input_private_mail').isEmail().escape(),
+	check('form_input_service_mail').isEmail().escape(),
+	check('form_input_country').escape(),
+	check('form_input_postcode').escape(),
+	check('form_input_street').escape(),
+	check('form_input_birthdate').escape()
+  ], async function( request, response ) {
 	const sFirstname = request.body.form_input_firstname;
 	const sSurname = request.body.form_input_surname;
 	const sPrivateEmail = request.body.form_input_private_mail;

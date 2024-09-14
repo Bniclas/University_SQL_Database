@@ -12,6 +12,10 @@
     padding: 5px;
 }
 
+.PageHeadContainer h1, h2, h3, h4, h5, h6 {
+    color: var(--basic--fontcolor);
+}
+
 .PageContent {
     padding: 5px;
     margin: 10px;
