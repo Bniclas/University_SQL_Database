@@ -88,15 +88,6 @@ app.use( requireAuth );
 app.set( 'views', path.join(__dirname, '/src/views') );
 app.set( 'view engine', 'ejs' );
 
-const createMessage = async( type, text ) => {
-	const _message = {
-		type: type,
-		text: text
-	}
-
-	return _message;
-}
-
 const mountData = async( req, res, _others ) => {
 	var data = {
 		loginstatus: await user.getLoginStatus( req ),

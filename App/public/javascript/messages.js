@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
     if ( oPageContent ){
         setTimeout( ()=>{
-            const messageBoxes = document.getElementsByClassName("MessageBox");
+            const messageBoxes = document.getElementsByTagName("MessageBox");
         
             for( let i=0; i<messageBoxes.length; i++ ){
                 let msgBox = messageBoxes[i];

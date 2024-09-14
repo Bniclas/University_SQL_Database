@@ -1,6 +1,55 @@
-.MessageBox {
-    background-color: var(--color--msg--red);
-    color: white;
+.MessageBoxAlert {
+    color: #721c24;
+    background-color: #f8d7da;
+    border: 2px solid #f5c6cb;
+    padding: 20px;
+    margin: 5px;
+    border-radius: 10px;
+    font-weight: bold;
+    position: fixed; 
+    z-index: 1000;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -20%);
+}
+
+.MessageBoxWarn {
+    color: #856404;
+    background-color: #fff3cd;
+    border: 2px solid #ffeeba;
+    padding: 20px;
+    margin: 5px;
+    border-radius: 10px;
+    font-weight: bold;
+    position: fixed; 
+    z-index: 1000;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -20%);
+}
+
+.MessageBoxInfo {
+    color: #0c5460;
+    background-color: #d1ecf1;
+    border: 2px solid #bee5eb;
+    padding: 20px;
+    margin: 5px;
+    border-radius: 10px;
+    font-weight: bold;
+    position: fixed; 
+    z-index: 1000;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -20%);
+}
+
+.MessageBoxSuccess {
+    color: #155724;
+    background-color: #d4edda;
+    border: 2px solid #c3e6cb;
     padding: 20px;
     margin: 5px;
     border-radius: 10px;
