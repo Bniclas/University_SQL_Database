@@ -19,6 +19,7 @@ const compression = require("compression");
 const database = require( path.join(__dirname, '/src/dataservice/database_init.js') );
 const login = require( path.join(__dirname, '/src/dataservice/login.js') );
 const user = require( path.join(__dirname, '/src/dataservice/user.js') );
+const message_service = require( path.join(__dirname, '/src/util/service_message.js') );
 
 const SQLDB = database.SQLDB;
 database.InitDatabase();
@@ -100,10 +101,12 @@ const mountData = async( req, res, _others ) => {
 	var data = {
 		loginstatus: await user.getLoginStatus( req ),
 		userid: await user.getUserID( req ),
-		message: _others.message || 'undefined',
+		message: await message_service.getMessage( req ) || 'undefined',
 	};
+	await message_service.removeMessage( req );
 
-	Object.assign( data, _others );
+	//Object.assign( data, _others );
+	data = { ...data, ..._others };
 	return data;
 }
 
@@ -304,17 +307,14 @@ app.post("/create_person", async function( request, response ) {
 		sPostcode, 
 		sCountry, 
 		sStreet
-	)
+	);
 
-	var messageType = "success";
-	var messageText = "Success: Created new Person!";
+	let messageType = ( val === undefined || val === false ) ? "alert" : "success";
+	let messageText = ( val === undefined || val === false ) ? "Error: Test user could not be created!" : "Success: Created new Person!";
+	await message_service.setMessage( request, messageType, messageText );
 
-	if ( val === undefined || val === false ){
-		messageType = "alert";
-		messageText = "Error: Test user could not be created!";
-	}
-
-	response.render( 'home', await mountData( request, response, { message: await createMessage(messageType, messageText) } ) );
+	response.redirect("/home");
+	//response.render( 'home', await mountData( request, response, { message: await createMessage(messageType, messageText) } ) );
 })
 	
 
