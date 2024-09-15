@@ -11,7 +11,7 @@
         /* max-height: 100%; */
         padding: 20px;
         background-color: rgb(255 255 255);
-        margin: 5px;
+        margin: 10px;
         font-size: small;
         display: flex;
         flex-direction: column;
@@ -65,7 +65,7 @@
         /* max-height: 100%; */
         /* padding: 20px; */
         background-color: rgb(255 255 255);
-        margin: 5px;
+        margin: 10px;
         font-size: large;
         display: flex;
         flex-direction: column;

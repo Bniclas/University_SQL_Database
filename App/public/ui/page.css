@@ -10,6 +10,10 @@
 
 .PageHeadContainer {
     padding: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .PageHeadContainer h1, h2, h3, h4, h5, h6 {
@@ -19,4 +23,9 @@
 .PageContent {
     padding: 5px;
     margin: 10px;
+}
+
+.CountryImage {
+    width: 40%;
+    height: 40%;
 }

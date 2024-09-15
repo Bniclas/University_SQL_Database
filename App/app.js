@@ -60,7 +60,7 @@ app.use(i18n({
 	translationsPath: path.join(__dirname, 'i18n'), // <--- use here. Specify translations files path.
 	siteLangs: ["en","de"],
 	textsVarName: 'translation',
-	browserEnable: false
+	browserEnable: true
 }));
 app.use( helmet() );
 app.use( rateLimit({
@@ -306,11 +306,11 @@ app.get("/myprofile", async function( request, response ) {
 	}
 })
 
-app.get("/create_person", async function( request, response ) {
+app.get("/create_person", requireAdmin, async function( request, response ) {
 	response.render( 'create_person_form', await mountData( request, response, {  } ) );
 })
 
-app.post("/create_person", [
+app.post("/create_person", requireAdmin, [
 	check('form_input_firstname').escape(),
 	check('form_input_surname').escape(),
 	check('form_input_private_mail').isEmail().escape(),
