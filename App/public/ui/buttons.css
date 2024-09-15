@@ -12,7 +12,7 @@
         padding: 20px;
         background-color: rgb(255 255 255);
         margin: 10px;
-        font-size: small;
+        font-size: xx-small;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -20,15 +20,17 @@
         justify-content: center;
         /* font-weight: bold; */
         /* margin: 10px; */
-        width: 10rem;
-        height: 10rem;
+        width: 8rem;
+        height: 8rem;
         color: black;
         font-family: var(--global--font);
+        transition: background-color 0.3s ease;
     }
     
     .CategoryButton:hover {
         background-color: rgb(80, 79, 79);
         cursor: pointer;
+        color: var(--basic--color);
     }
     
     .StandardButton {
@@ -42,6 +44,7 @@
         color: white;
         margin: 5px;
         font-size: medium;
+        transition: background-color 0.3s ease;
     }
     
     .StandardButton:hover {
@@ -78,6 +81,7 @@
         height: 300px;
         color: black;
         font-family: var(--global--font);
+        transition: background-color 0.3s ease;
     }
 
     .CategoryButton * {
@@ -87,6 +91,7 @@
     .CategoryButton:hover {
         background-color: rgb(80, 79, 79);
         cursor: pointer;
+        color: var(--basic--color);
     }
 
     .StandardButton {
@@ -100,6 +105,7 @@
         color: white;
         margin: 5px;
         font-size: medium;
+        transition: background-color 0.3s ease;
     }
 
     .StandardButton:hover {

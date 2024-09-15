@@ -29,3 +29,17 @@
     width: 40%;
     height: 40%;
 }
+
+.CountryImage:hover {
+    animation: rotateAnimation 0.4s 1 linear;
+}
+
+@keyframes rotateAnimation {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
