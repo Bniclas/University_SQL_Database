@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="de">
+    <%- include("import.ejs") %>
+
+    <body>
+        <div class="Page">
+            <div class="PageHead">
+                <div class="PageHeadContainer">
+                    <h1>Manage Persons</h1>
+                </div>
+            </div>
+            <div class="PageContent">
+                
+                <div class="search-container">
+                    <form action="/manage_persons" method="post">
+                      <input type="text" placeholder="Search.." name="search">
+                      <button type="submit"><i class="fa fa-search"></i></button>
+                    </form>
+                </div>
+
+                
+                <table>
+                    <tr>
+                        <th><%= translation.personid %></th>
+                        <th><%= translation.firstname %></th>
+                        <th><%= translation.surname %></th>
+                        <th><%= translation.mail_private %></th>
+                        <th><%= translation.mail_service %></th>
+                        <th><%= translation.address %></th>
+                        <th><%= translation.actions %></th>
+                    </tr>
+
+                    <% if (found_results.length > 0){  %>
+                        <% found_results.forEach( (res) => { %>
+                            <tr>
+                                <td> <%= res["person_id"] %> </td>
+                                <td> <%= res["firstname"] %> </td>
+                                <td> <%= res["surname"] %> </td>
+                                <td> <%= res["email_private"] %> </td>
+                                <td> <%= res["email_service"] %> </td>
+                                <td> <%= res["postcode"] %> </td>
+                                <td> <a href="/manage_specific_user?personid=<%= res['person_id'] %>"> <button class="StandardButton" > <%= translation.actions %> </button> </a> </td>
+                            </tr>
+                        <% }) %>
+                    <% }; %>
+                </table>
+
+
+                <a href="/home"> <button class="StandardButton"><%= translation.nav_back %></button> </a>
+            <div>
+        </div>
+    </body>
+
+</html>

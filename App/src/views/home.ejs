@@ -19,7 +19,7 @@
                 <% } %>
                 <div class="CategoryContainer">
                     <% if ( loginstatus === true ) { %>
-                        <h3>Admin and personal area</h3>
+                        <h3>Private Area</h3>
                         <div class="CategoryButtonRow">
                             <a href="/myprofile"> 
                                 <button class="CategoryButton"> 
@@ -27,25 +27,11 @@
                                     <%= translation.btn_myprofile %> 
                                 </button> 
                             </a>
-
-                            <a href="/create_person"> 
-                                <button class="CategoryButton"> 
-                                    <img class="CategoryIconContainer" src="/public/images/icons/uni_user_add_01.png">
-                                    <%= translation.btn_create_person %> 
-                                </button> 
-                            </a>
                         </div>
 
-                        <h3>Analyse area</h3>
+                        <h3>Public Area</h3>
 
-                        <div class="CategoryButtonRow">
-                            <a href="/student_overview?page=1"> 
-                                <button class="CategoryButton"> 
-                                    <img class="CategoryIconContainer" src="/public/images/icons/uni_hat_02.png">
-                                    <%= translation.btn_student_info %> 
-                                </button> 
-                            </a>
-    
+                        <div class="CategoryButtonRow">    
                             <a href="/course_overview"> 
                                 <button class="CategoryButton"> 
                                     <img class="CategoryIconContainer" src="/public/images/icons/uni_course_01.png">
@@ -57,13 +43,6 @@
                                 <button class="CategoryButton"> 
                                     <img class="CategoryIconContainer" src="/public/images/icons/uni_exam_01.png">
                                     <%= translation.btn_course_mark_average %> 
-                                </button> 
-                            </a>
-
-                            <a href="/employee_overview?page=1"> 
-                                <button class="CategoryButton"> 
-                                    <img class="CategoryIconContainer" src="/public/images/icons/uni_employee_01.png">
-                                    <%= translation.btn_employee_info %> 
                                 </button> 
                             </a>
 
@@ -81,6 +60,43 @@
                                 </button> 
                             </a>
                         </div>
+
+                        <h3>Manager Area</h3>
+                        <div class="CategoryButtonRow">
+
+                            <a href="/student_overview?page=1"> 
+                                <button class="CategoryButton"> 
+                                    <img class="CategoryIconContainer" src="/public/images/icons/uni_hat_02.png">
+                                    <%= translation.btn_student_info %> 
+                                </button> 
+                            </a>
+
+                            <a href="/employee_overview?page=1"> 
+                                <button class="CategoryButton"> 
+                                    <img class="CategoryIconContainer" src="/public/images/icons/uni_employee_01.png">
+                                    <%= translation.btn_employee_info %> 
+                                </button> 
+                            </a>
+                            
+                        </div>
+
+                        <h3>Admin Area</h3>
+
+                        <div class="CategoryButtonRow">
+                            <a href="/create_person"> 
+                                <button class="CategoryButton"> 
+                                    <img class="CategoryIconContainer" src="/public/images/icons/uni_user_add_01.png">
+                                    <%= translation.btn_create_person %> 
+                                </button> 
+                            </a>
+
+                            <a href="/manage_persons"> 
+                                <button class="CategoryButton"> 
+                                    <img class="CategoryIconContainer" src="/public/images/icons/uni_manage_01.png">
+                                    <%= translation.btn_manage_persons %> 
+                                </button> 
+                            </a>
+                        </div>                        
 
 
                     <% } else { %>

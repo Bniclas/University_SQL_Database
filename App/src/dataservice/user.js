@@ -55,6 +55,18 @@ const checkPassword = async( request, response, personid, givenPassword ) => {
         if ( result == true ){
             request.session.userid = personid;
             request.session.hasAuth = true;
+            var [isAdminRows, fields] = await db.execute("SELECT * FROM admin WHERE fk_person = ?", [ personid ]);
+
+            if ( isAdminRows.length > 0 ){
+                request.session.isAdmin = true;
+            }
+
+            var [isManagerRows, fields] = await db.execute("SELECT * FROM manager WHERE fk_person = ?", [ personid ]);
+
+            if ( isManagerRows.length > 0 ){
+                request.session.isManager = true;
+            }
+
             await message_service.setMessage( request, "success", "Login successful!" );
             response.redirect("/home");
         }

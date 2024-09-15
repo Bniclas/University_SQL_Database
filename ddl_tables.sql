@@ -226,3 +226,13 @@ CREATE TABLE IF NOT EXISTS student_exam_attempt (
 	FOREIGN KEY ( fk_exam ) REFERENCES exam( exam_nr ),
 	FOREIGN KEY ( fk_matid ) REFERENCES student( mat_id )
 );
+
+CREATE TABLE IF NOT EXISTS admin (
+	fk_person INT UNSIGNED UNIQUE NOT NULL,
+	FOREIGN KEY ( fk_person ) REFERENCES person( person_id )
+)
+
+CREATE TABLE IF NOT EXISTS manager (
+	fk_person INT UNSIGNED UNIQUE NOT NULL,
+	FOREIGN KEY ( fk_person ) REFERENCES person( person_id )
+)

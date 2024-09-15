@@ -85,6 +85,26 @@ const requireAuth = async ( req, res, next ) => {
 	}
 }
 
+const requireAdmin = async ( req, res, next ) => {
+	if ( !req.session.isAdmin ){
+		await message_service.setMessage( req, "alert", "You are not authorized! Only admins." );
+		res.redirect("/home");
+	}
+	else {
+		next();
+	}
+}
+
+const requireManager = async ( req, res, next ) => {
+	if ( !req.session.isManager ){
+		await message_service.setMessage( req, "alert", "You are not authorized! Only managers." );
+		res.redirect("/home");
+	}
+	else {
+		next();
+	}
+}
+
 app.use( requireAuth );
 
 app.set( 'views', path.join(__dirname, '/src/views') );
@@ -133,7 +153,7 @@ app.post('/login', [
 	await login.checkLogin( request, response, sEmail, sPassword );
 });
 
-app.get('/student_overview', async function(request, response) {
+app.get('/student_overview', requireManager, async function(request, response) {
 	var page = request.query.page;
 	page = page - 1;
 	const limit = 25;
@@ -198,7 +218,7 @@ app.get('/course_mark_average', async function(request, response) {
 	}
 });
 
-app.get('/employee_overview', async function(request, response) {
+app.get('/employee_overview', requireManager, async function(request, response) {
 	var iPage = request.query.page;
 	iPage = iPage - 1;
 	const limit = 25;
@@ -274,10 +294,16 @@ app.get("/myprofile", async function( request, response ) {
 		return;
 	}
 
-	var [mydata, fields] = await SQLDB.execute("SELECT * FROM view_person_essential WHERE person_id = ?", [ nPersonID ]);
-	var [mycourses, fields] = await SQLDB.execute("SELECT * FROM view_person_course_essential WHERE person_id = ?", [ nPersonID ]);
-
-	response.render( 'my_profile', await mountData( request, response, { mydata: mydata[0], mycourses: mycourses } ) );
+	try {
+		var [mydata, fields] = await SQLDB.execute("SELECT * FROM view_person_essential WHERE person_id = ?", [ nPersonID ]);
+		var [mycourses, fields] = await SQLDB.execute("SELECT * FROM view_person_course_essential WHERE person_id = ?", [ nPersonID ]);
+	
+		response.render( 'my_profile', await mountData( request, response, { mydata: mydata[0], mycourses: mycourses } ) );
+	}
+	catch( e ){
+		console.log( e );
+		response.redirect("/home");
+	}
 })
 
 app.get("/create_person", async function( request, response ) {
@@ -304,23 +330,63 @@ app.post("/create_person", [
 	const dBirthdate = request.body.form_input_birthdate;
 	const sPassword = sFirstname + sSurname;
 
-	const val = await user.createUser(
-		sPrivateEmail, 
-		sServiceEmail, 
-		sPassword, 
-		sFirstname, 
-		sSurname, 
-		dBirthdate, 
-		sPostcode, 
-		sCountry, 
-		sStreet
-	);
-
-	let sMessageType = ( val === undefined || val === false ) ? "alert" : "success";
-	let sMessageText = ( val === undefined || val === false ) ? "Error: Test user could not be created!" : "Success: Created new Person!";
+	try {
+		const val = await user.createUser(
+			sPrivateEmail, 
+			sServiceEmail, 
+			sPassword, 
+			sFirstname, 
+			sSurname, 
+			dBirthdate, 
+			sPostcode, 
+			sCountry, 
+			sStreet
+		);
 	
-	await message_service.setMessage( request, sMessageType, sMessageText );
-	response.redirect("/home");
+		let sMessageType = ( val === undefined || val === false ) ? "alert" : "success";
+		let sMessageText = ( val === undefined || val === false ) ? "Error: Test user could not be created!" : "Success: Created new Person!";
+		
+		await message_service.setMessage( request, sMessageType, sMessageText );
+		response.redirect("/home");
+	}
+	catch( e ) {
+		console.log( e );
+		response.redirect("/home");
+	}
+})
+
+
+app.get("/manage_persons", requireAdmin, async function( request, response ) {
+	response.render( 'manage_persons', await mountData( request, response, { found_results: {} } ) );
+})
+
+app.post("/manage_persons", requireAdmin, [
+		check('search').escape(),
+	], async function( request, response ) {
+	const sSearchParam = "%" + request.body.search + "%";
+	try {
+		let [rows, fields] = await SQLDB.execute("SELECT * FROM view_person_essential WHERE person_id LIKE ? OR email_private LIKE ? OR email_service LIKE ? LIMIT 100", [ sSearchParam, sSearchParam, sSearchParam ]);
+	
+		if ( rows.length >90 ){
+			await message_service.setMessage( request, "warn", "Many results found. Limit was set at 100 rows." );
+		}
+		response.render( 'manage_persons', await mountData( request, response, { found_results: rows } ) );	
+	}
+	catch( e ){
+		console.log( e );
+	}
+})
+
+app.get("/manage_specific_user", requireAdmin, async ( request, response ) => {
+	const nPersonID = request.query.personid;
+	try {
+		let [rows, fields] = await SQLDB.execute("SELECT * FROM view_person_essential WHERE person_id = ?", [ nPersonID ]);
+
+		response.render( 'manage_single_user', await mountData( request, response, { person: rows[0] } ) );
+	}
+	catch( e ){
+		console.log( e );
+	}
 })
 	
 

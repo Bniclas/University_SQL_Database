@@ -18,3 +18,34 @@
 .inputfield[type="date"] {
     display: block;
 }
+
+.search-container {
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.search-container input[type=text] {
+    padding: 6px;
+    margin-top: 8px;
+    font-size: 17px;
+    border-radius: 30px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: var(--basic--color);
+    box-shadow: 0px 0px 10px var(--basic--color);
+}
+  
+.search-container button {
+    float: right;
+    padding: 6px 10px;
+    margin-top: 8px;
+    margin-left: 16px;
+    font-size: 17px;
+    cursor: pointer;
+    border-radius: 30px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: var(--basic--color);
+    box-shadow: 0px 0px 10px var(--basic--color);
+}
