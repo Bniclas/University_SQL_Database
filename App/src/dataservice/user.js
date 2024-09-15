@@ -1,6 +1,7 @@
 const db = require("./database_config").SQLDB;
 const hashSaltRounds = require("./database_config").hashSaltRounds;
 const bcrypt = require("bcrypt");
+const message_service = require( "../util/service_message" );
 
 const getLoginStatus = async ( req ) => {
     return ( req.session.hasAuth || false );
@@ -16,7 +17,7 @@ const getUserID = async( req ) => {
 }
 
 const userExistsByID = async( personid ) => {
-    var [rows, fields] = await db.execute("SELECT person_id FROM person WHERE person_id = ?", [personid]);
+    let [rows, fields] = await db.execute("SELECT person_id FROM person WHERE person_id = ?", [personid]);
 
     if ( rows.length == 0 ){
         return false;
@@ -27,7 +28,7 @@ const userExistsByID = async( personid ) => {
 }
 
 const userExistsByEmail = async( givenEmail ) => {
-    var [rows, fields] = await db.execute("SELECT person_id FROM person WHERE email_private = ? OR email_service = ?", [givenEmail,givenEmail]);
+    let [rows, fields] = await db.execute("SELECT person_id FROM person WHERE email_private = ? OR email_service = ?", [givenEmail,givenEmail]);
 
     if ( rows.length == 0 ){
         return false;
@@ -44,21 +45,24 @@ const checkPassword = async( request, response, personid, givenPassword ) => {
     }
 
     const [rows, fields] = await db.execute("SELECT password FROM person WHERE person_id = ?", [ personid ]);
-    if (rows.length > 0) {
-        await bcrypt.compare(givenPassword, rows[0]["password"], async function(error, result){
-            if ( result == true ){
-                request.session.userid = personid;
-                request.session.hasAuth = true;
-                response.redirect("/home");
-            }
-            else {
-                response.redirect("/login");
-            }
-        });
-    }	
-    else {
+    if (rows.length == 0) {
+        await message_service.setMessage( request, "warn", "User not found. Please check your input." );
         response.redirect("/login");
+        return;
     }
+
+    bcrypt.compare(givenPassword, rows[0]["password"], async function(error, result){
+        if ( result == true ){
+            request.session.userid = personid;
+            request.session.hasAuth = true;
+            await message_service.setMessage( request, "success", "Login successful!" );
+            response.redirect("/home");
+        }
+        else {
+            await message_service.setMessage( request, "warn", "Wrong credentials!" );
+            response.redirect("/login");
+        }
+    });
 }
 
 const createUser = async( 

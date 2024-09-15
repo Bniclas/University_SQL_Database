@@ -127,10 +127,10 @@ app.post('/login', [
 	check('form_input_email').escape(),
 	check('form_input_password').escape(),
   ], async function( request, response ) {
-	const input_email = request.body.form_input_email;
-	const input_password = request.body.form_input_password;
+	const sEmail = request.body.form_input_email;
+	const sPassword = request.body.form_input_password;
 
-	await login.checkLogin( request, response, input_email, input_password );
+	await login.checkLogin( request, response, sEmail, sPassword );
 });
 
 app.get('/student_overview', async function(request, response) {
@@ -171,7 +171,9 @@ app.get('/course_mark_average', async function(request, response) {
 			const [course_data, _fields] = await SQLDB.execute('SELECT * FROM view_course_mark_average WHERE courseid = ?', [courseid]);
 
 			if ( course_data.length == 0 ){
+				await message_service.setMessage( request, "info", "Sorry, no data found." );
 				goHome(request, response);
+				return;
 			}
 
 			const [marks_data, __fields] = await SQLDB.execute(" \
@@ -197,10 +199,10 @@ app.get('/course_mark_average', async function(request, response) {
 });
 
 app.get('/employee_overview', async function(request, response) {
-	var page = request.query.page;
-	page = page - 1;
+	var iPage = request.query.page;
+	iPage = iPage - 1;
 	const limit = 25;
-	const lowerLimit = page * limit;
+	const lowerLimit = iPage * limit;
 
 	try {
 		await SQLDB.execute(" \
@@ -265,15 +267,15 @@ app.get('/schedule_overview', async function(request, response) {
 });
 
 app.get("/myprofile", async function( request, response ) {
-	const personid = await user.getUserID( request );
+	const nPersonID = await user.getUserID( request );
 
-	if ( personid == null ){
+	if ( nPersonID == null ){
 		goHome( request, response );
 		return;
 	}
 
-	var [mydata, fields] = await SQLDB.execute("SELECT * FROM view_person_essential WHERE person_id = ?", [ personid ]);
-	var [mycourses, fields] = await SQLDB.execute("SELECT * FROM view_person_course_essential WHERE person_id = ?", [ personid ]);
+	var [mydata, fields] = await SQLDB.execute("SELECT * FROM view_person_essential WHERE person_id = ?", [ nPersonID ]);
+	var [mycourses, fields] = await SQLDB.execute("SELECT * FROM view_person_course_essential WHERE person_id = ?", [ nPersonID ]);
 
 	response.render( 'my_profile', await mountData( request, response, { mydata: mydata[0], mycourses: mycourses } ) );
 })
@@ -300,12 +302,12 @@ app.post("/create_person", [
 	const sPostcode = request.body.form_input_postcode;
 	const sStreet = request.body.form_input_street;
 	const dBirthdate = request.body.form_input_birthdate;
-	const password = sFirstname + sSurname;
+	const sPassword = sFirstname + sSurname;
 
 	const val = await user.createUser(
 		sPrivateEmail, 
 		sServiceEmail, 
-		password, 
+		sPassword, 
 		sFirstname, 
 		sSurname, 
 		dBirthdate, 
@@ -314,12 +316,11 @@ app.post("/create_person", [
 		sStreet
 	);
 
-	let messageType = ( val === undefined || val === false ) ? "alert" : "success";
-	let messageText = ( val === undefined || val === false ) ? "Error: Test user could not be created!" : "Success: Created new Person!";
-	await message_service.setMessage( request, messageType, messageText );
-
+	let sMessageType = ( val === undefined || val === false ) ? "alert" : "success";
+	let sMessageText = ( val === undefined || val === false ) ? "Error: Test user could not be created!" : "Success: Created new Person!";
+	
+	await message_service.setMessage( request, sMessageType, sMessageText );
 	response.redirect("/home");
-	//response.render( 'home', await mountData( request, response, { message: await createMessage(messageType, messageText) } ) );
 })
 	
 

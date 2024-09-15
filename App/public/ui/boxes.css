@@ -9,9 +9,9 @@
     position: fixed; 
     z-index: 1000;
     position: absolute;
-    top: 20%;
+    top:10px;
     left: 50%;
-    transform: translate(-50%, -20%);
+    transform: translate(-50%, -5%);
 }
 
 .MessageBoxWarn {
@@ -25,9 +25,9 @@
     position: fixed; 
     z-index: 1000;
     position: absolute;
-    top: 20%;
+    top:10px;
     left: 50%;
-    transform: translate(-50%, -20%);
+    transform: translate(-50%, -5%);
 }
 
 .MessageBoxInfo {
@@ -41,9 +41,9 @@
     position: fixed; 
     z-index: 1000;
     position: absolute;
-    top: 20%;
+    top:10px;
     left: 50%;
-    transform: translate(-50%, -20%);
+    transform: translate(-50%, -5%);
 }
 
 .MessageBoxSuccess {
@@ -57,7 +57,7 @@
     position: fixed; 
     z-index: 1000;
     position: absolute;
-    top: 20%;
+    top:10px;
     left: 50%;
-    transform: translate(-50%, -20%);
+    transform: translate(-50%, -5%);
 }

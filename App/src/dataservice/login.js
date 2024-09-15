@@ -10,7 +10,7 @@ async function doLogout( request, response ){
         if (err) {
             console.log(err);
         } else {
-            response.redirect("/home");
+            response.redirect("/login");
         }
     });
 }

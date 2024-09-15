@@ -44,5 +44,10 @@
     "semester": "Semester",
     "ects": "ECTS",
     "mark": "Mark",
-    "country": "Country"
+    "country": "Country",
+    "msg_wrong_credentials": "Wrong credentials!",
+    "msg_login_success": "Login successful!",
+    "msg_user_not_found": "User not found. Please check your input.",
+    "msg_person_created": "Success: Created new Person!",
+    "msg_person_create_fail": "Error: Test user could not be created!"
 }
