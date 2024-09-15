@@ -16,19 +16,18 @@
                             <%= translation.btn_logout %> 
                         </button> 
                     </a>
-
-                    <h2>My Area</h2>
                 <% } %>
                 <div class="CategoryContainer">
                     <% if ( loginstatus === true ) { %>
-                        <a href="/myprofile"> 
-                            <button class="CategoryButton"> 
-                                <img class="CategoryIconContainer" src="/public/images/icons/uni_user_01.png">
-                                <%= translation.btn_myprofile %> 
-                            </button> 
-                        </a>
+                        <h3>Admin and personal area</h3>
+                        <div class="CategoryButtonRow">
+                            <a href="/myprofile"> 
+                                <button class="CategoryButton"> 
+                                    <img class="CategoryIconContainer" src="/public/images/icons/uni_user_01.png">
+                                    <%= translation.btn_myprofile %> 
+                                </button> 
+                            </a>
 
-                        <div class="two">
                             <a href="/create_person"> 
                                 <button class="CategoryButton"> 
                                     <img class="CategoryIconContainer" src="/public/images/icons/uni_user_add_01.png">
@@ -37,52 +36,44 @@
                             </a>
                         </div>
 
-                        <div class="one">
+                        <h3>Analyse area</h3>
+
+                        <div class="CategoryButtonRow">
                             <a href="/student_overview?page=1"> 
                                 <button class="CategoryButton"> 
                                     <img class="CategoryIconContainer" src="/public/images/icons/uni_hat_02.png">
                                     <%= translation.btn_student_info %> 
                                 </button> 
                             </a>
-                        </div>
     
-                        <div class="two">
                             <a href="/course_overview"> 
                                 <button class="CategoryButton"> 
                                     <img class="CategoryIconContainer" src="/public/images/icons/uni_course_01.png">
                                     <%= translation.btn_coursa_data %> 
                                 </button> 
                             </a>
-                        </div>
     
-                        <div class="three">
                             <a href="/course_mark_average"> 
                                 <button class="CategoryButton"> 
                                     <img class="CategoryIconContainer" src="/public/images/icons/uni_exam_01.png">
                                     <%= translation.btn_course_mark_average %> 
                                 </button> 
                             </a>
-                        </div>
-    
-                        <div class="one">
+
                             <a href="/employee_overview?page=1"> 
                                 <button class="CategoryButton"> 
                                     <img class="CategoryIconContainer" src="/public/images/icons/uni_employee_01.png">
                                     <%= translation.btn_employee_info %> 
                                 </button> 
                             </a>
-                        </div>
-    
-                        <div class="two">
+
                             <a href="/location_overview"> 
                                 <button class="CategoryButton"> 
                                     <img class="CategoryIconContainer" src="/public/images/icons/uni_building_02.png">
                                     <%= translation.btn_locations %> 
                                 </button> 
                             </a>
-                        </div>
-    
-                        <div class="three">
+
                             <a href="/schedule_overview"> 
                                 <button class="CategoryButton"> 
                                     <img class="CategoryIconContainer" src="/public/images/icons/uni_schedule_01.png">
@@ -90,6 +81,8 @@
                                 </button> 
                             </a>
                         </div>
+
+
                     <% } else { %>
                         <a href="/login"> 
                             <button class="StandardButton"> 
