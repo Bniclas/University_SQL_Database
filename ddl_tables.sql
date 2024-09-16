@@ -230,9 +230,9 @@ CREATE TABLE IF NOT EXISTS student_exam_attempt (
 CREATE TABLE IF NOT EXISTS admin (
 	fk_person INT UNSIGNED UNIQUE NOT NULL,
 	FOREIGN KEY ( fk_person ) REFERENCES person( person_id )
-)
+);
 
 CREATE TABLE IF NOT EXISTS manager (
 	fk_person INT UNSIGNED UNIQUE NOT NULL,
 	FOREIGN KEY ( fk_person ) REFERENCES person( person_id )
-)
+);
