@@ -1,9 +1,9 @@
 .PageHead {
-    /*background-color: var(--basic--color);*/
-    background: linear-gradient(145deg, var(--basic--color) 10%, white);
+    background-color: var(--basic--color);
+    /*background: linear-gradient(145deg, var(--basic--color) 10%, white);*/
     box-shadow: 0px 0px 10px #111f38;
-    border-radius: 30px;
-    margin: 5px;
+    border-radius: 0;
+    margin: 0px;
     padding-left: 10px;
     padding-right: 10px;
 }
@@ -16,8 +16,10 @@
     justify-content: space-between;
 }
 
-.PageHeadContainer h1, h2, h3, h4, h5, h6 {
-    color: var(--basic--fontcolor);
+.PageHeadContainer h1,
+.PageHeadContainer h2,
+.PageHeadContainer h3 {
+    color: var(--basic--fontcolor--pagehead);
 }
 
 .PageContent {
@@ -26,20 +28,20 @@
 }
 
 .CountryImage {
-    width: 40%;
-    height: 40%;
+    width: 20%;
+    height: 20%;
 }
 
 .CountryImage:hover {
-    animation: rotateAnimation 0.4s 1 linear;
+    animation: rotateAnimation 0.3s 1 linear;
 }
 
 @keyframes rotateAnimation {
-  0% {
-    transform: rotate(0deg);
-  }
+    0% {
+        transform: rotate(0deg);
+    }
 
-  100% {
-    transform: rotate(360deg);
-  }
+    100% {
+        transform: rotate(360deg);
+    }
 }

@@ -74,8 +74,13 @@ td {
 }
 
 
+tr {
+    background-color: rgb(255, 255, 255);
+    border-bottom: 2px solid var(--basic--color);
+}
+
 tr:nth-child(even) {
-    background-color: rgb(233, 233, 233);
+    background-color: rgb(224, 224, 224);
     border-bottom: 2px solid var(--basic--color);
 }
 
