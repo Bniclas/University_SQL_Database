@@ -10,16 +10,18 @@
                     <label for="form_input_username"> 
                         <%= translation.lbl_email %>
                     </label>
-                    <input type="text" id="form_input_email" name="form_input_email" class="inputfield" autocomplete="off" role="presentation" autofill="off">
+                    <input type="text" id="form_input_email" name="form_input_email" class="inputfieldForm" autocomplete="off" role="presentation" autofill="off">
                     <br>
                     <label for="form_input_password"> 
                         <%= translation.lbl_password %>
                     </label>
-                    <input type="password" id="form_input_password" name="form_input_password" class="inputfield" autocomplete="off" role="presentation" autofill="off">
+                    <input type="password" id="form_input_password" name="form_input_password" class="inputfieldForm" autocomplete="off" role="presentation" autofill="off">
                     <br>
-                    <button type="submit" class="StandardButton" util="done"> <%= translation.btn_login %> </button>
-                    <br>
-                    <button type="button" class="StandardButton" id="go-back"><%= translation.nav_back %></button> 
+
+                    <div class="FlexBox">
+                        <button type="submit" class="StandardButtonWide" util="done"> <%= translation.btn_login %> </button>
+                        <button type="button" class="StandardButtonWide" id="go-back"><%= translation.nav_back %></button> 
+                    </div>
                 </form>
             </div>
         </div>

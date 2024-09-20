@@ -1,7 +1,7 @@
 @media (max-width:1280px)  { /* smartphones, portrait iPhone, portrait 480x320 phones (Android) */ 
     .CategoryButton {
         border-radius: 30px;
-        border-width: 2px;
+        border-width: 0px;
         border-style: solid;
         border-color: var(--basic--color);
         box-shadow: 0px 0px 10px var(--basic--color);
@@ -30,7 +30,7 @@
 
     .CategoryButton-dark-mode {
         border-radius: 30px;
-        border-width: 2px;
+        border-width: 0px;
         border-style: solid;
         border-color: var(--basic--color);
         box-shadow: 0px 0px 10px var(--basic--color);
@@ -62,8 +62,8 @@
     }
     
     .StandardButton {
-        border-radius: 30px;
-        border-width: 2px;
+        border-radius: 10px;
+        border-width: 0px;
         border-style: solid;
         border-color: var(--basic--color);
         box-shadow: 0px 0px 10px var(--basic--color);
@@ -86,7 +86,7 @@
 @media (min-width:1281px) {
     .CategoryButton {
         border-radius: 30px;
-        border-width: 2px;
+        border-width: 0px;
         border-style: solid;
         border-color: var(--basic--color);
         box-shadow: 0px 0px 10px var(--basic--color);
@@ -118,7 +118,7 @@
 
     .CategoryButton-dark-mode {
         border-radius: 30px;
-        border-width: 2px;
+        border-width: 0px;
         border-style: solid;
         border-color: var(--basic--color);
         box-shadow: 0px 0px 10px var(--basic--color);
@@ -148,9 +148,9 @@
         padding: 30px;
     }
 
-    .StandardButton {
-        border-radius: 30px;
-        border-width: 2px;
+    .StandardButton, .StandardButtonWide {
+        border-radius: 10px;
+        border-width: 0px;
         border-style: solid;
         border-color: var(--basic--color);
         box-shadow: 0px 0px 10px var(--basic--color);
@@ -162,9 +162,13 @@
         transition: background-color 0.3s ease;
     }
 
-    .StandardButton:hover {
+    .StandardButton:hover, .StandardButtonWide:hover {
         background-color: rgb(80, 79, 79);
         color: white;
         cursor: pointer;
+    }
+
+    .StandardButtonWide {
+        width: 100%;
     }
 }

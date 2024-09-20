@@ -6,58 +6,60 @@
         <div class="Page">
             <div class="PageContent">
                 <form name="createPersonForm" action="/create_person" method="post" class="createPersonForm">
-                    <h1> <%=translation.btn_create_person%></h1>
+                    <h3> <%=translation.btn_create_person%></h3>
                     <br>
+                    
                     <label for="form_input_firstname"> 
                         <%= translation.firstname %>
                     </label>
-                    <input required type="text" id="form_input_firstname" name="form_input_firstname" class="inputfield" autocomplete="off" role="presentation" autofill="off" >
+                    <input required type="text" id="form_input_firstname" name="form_input_firstname" class="inputfieldForm" autocomplete="off" role="presentation" autofill="off" >
 
                     <br>
                     <label for="form_input_surname"> 
                         <%= translation.surname %>
                     </label>
-                    <input required type="text" id="form_input_surname" name="form_input_surname" class="inputfield" autocomplete="off" role="presentation" autofill="off" >
+                    <input required type="text" id="form_input_surname" name="form_input_surname" class="inputfieldForm" autocomplete="off" role="presentation" autofill="off" >
 
                     <br>
                     <label for="form_input_private_mail"> 
                         <%= translation.mail_private %>
                     </label>
-                    <input required type="email" id="form_input_private_mail" name="form_input_private_mail" class="inputfield" autocomplete="off" role="presentation" autofill="off" >
+                    <input required type="email" id="form_input_private_mail" name="form_input_private_mail" class="inputfieldForm" autocomplete="off" role="presentation" autofill="off" >
                    
                     <br>
                     <label for="form_input_service_mail"> 
                         <%= translation.mail_service %>
                     </label>
-                    <input required type="email" id="form_input_service_mail" name="form_input_service_mail" class="inputfield" autocomplete="off" role="presentation" autofill="off" >
+                    <input required type="email" id="form_input_service_mail" name="form_input_service_mail" class="inputfieldForm" autocomplete="off" role="presentation" autofill="off" >
 
                     <br>
                     <label for="form_input_country"> 
                         <%= translation.country %>
                     </label>
-                    <input required type="text" id="form_input_country" name="form_input_country" class="inputfield" autocomplete="off" role="presentation" autofill="off" >
+                    <input required type="text" id="form_input_country" name="form_input_country" class="inputfieldForm" autocomplete="off" role="presentation" autofill="off" >
 
                     <br>
                     <label for="form_input_postcode"> 
                         <%= translation.postcode %>
                     </label>
-                    <input required type="text" id="form_input_postcode" name="form_input_postcode" class="inputfield" autocomplete="off" role="presentation" autofill="off" >
+                    <input required type="text" id="form_input_postcode" name="form_input_postcode" class="inputfieldForm" autocomplete="off" role="presentation" autofill="off" >
 
                     <br>
                     <label for="form_input_street"> 
                         <%= translation.street %>
                     </label>
-                    <input required type="text" id="form_input_street" name="form_input_street" class="inputfield" autocomplete="off" role="presentation" autofill="off" >
+                    <input required type="text" id="form_input_street" name="form_input_street" class="inputfieldForm" autocomplete="off" role="presentation" autofill="off" >
                     
                     <br>
                     <label for="form_input_birthdate"><%= translation.birthdate %></label>
-                    <input class="inputfield" type="date" id="form_input_birthdate" name="form_input_birthdate">
+                    <input class="inputfieldForm" type="date" id="form_input_birthdate" name="form_input_birthdate">
 
                     <br>
-                    <button type="submit" class="StandardButton" util="done"> <%= translation.btn_create_person %> </button>
-                    <br>
 
-                    <button type="button" class="StandardButton" id="go-back"><%= translation.nav_back %></button>
+                    <div class="FlexBox">
+                        <button type="submit" class="StandardButtonWide" util="done"> <%= translation.btn_create_person %> </button>
+                        <button type="button" class="StandardButtonWide" id="go-back"><%= translation.nav_back %></button>
+                    </div>
                 </form>
             <div>
         </div>

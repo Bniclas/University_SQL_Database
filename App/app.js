@@ -17,9 +17,9 @@ const cookieParser = require('cookie-parser');
 const bodyParser  = require('body-parser');
 const compression = require("compression");
 
-const database = require( path.join(__dirname, '/src/dataservice/database_init.js') );
-const login = require( path.join(__dirname, '/src/dataservice/login.js') );
-const user = require( path.join(__dirname, '/src/dataservice/user.js') );
+const database = require( path.join(__dirname, '/src/database/database_init.js') );
+const login = require( path.join(__dirname, '/src/database/login.js') );
+const user = require( path.join(__dirname, '/src/database/user.js') );
 const message_service = require( path.join(__dirname, '/src/util/service_message.js') );
 
 const SQLDB = database.SQLDB;
