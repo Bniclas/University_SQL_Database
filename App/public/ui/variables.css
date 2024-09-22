@@ -1,13 +1,17 @@
 :root {
+    --basic--color: rgb(122, 101, 225);
+    --basic--fontcolor: rgb(30, 30, 30);
+    
     --global--font: Nunito; 
     --header-height: 5%;
+    --header--bgcolor: white;
+    --header--color: var(--basic--color);
     --footer-height: 5%;
-    --basic--color: rgb(101, 177, 225);
-    --basic--fontcolor: rgb(30, 30, 30);
-    --basic--fontcolor--pagehead: rgb(255, 255, 255);
+
     --color--msg--red: red;
     --color--msg--orange: orange;
     --color--msg--blue: blue;
     --color--msg--green: green;
+    --darkmode--bgcolor: rgb(68, 68, 68);
     --darkmode--fontcolor: white;
 }

@@ -4,14 +4,7 @@
 
     <body>
         <div class="Page">
-            <div class="PageHead">
-                <div class="PageHeadContainer">
-                    <div>
-                        <h1> <%=translation.app_title%> </h1>
-                    </div>
-                    <%- include("page_head.ejs") %>
-                </div>
-            </div>
+            <%- include("essentials/page_head.ejs") %>
             <div class="PageContent">
                 <% if ( loginstatus === true ) { %>
                     <a href="/logout"> 
@@ -26,7 +19,7 @@
                         <div class="CategoryButtonRow">
                             <a href="/myprofile"> 
                                 <button class="CategoryButton"> 
-                                    <img class="CategoryIconContainer" src="/public/images/icons/uni_user_01.png">
+                                    <img loading="lazy" class="CategoryIconContainer" src="/public/images/icons/uni_user_01.png">
                                     <%= translation.btn_myprofile %> 
                                 </button> 
                             </a>
@@ -37,28 +30,28 @@
                         <div class="CategoryButtonRow">    
                             <a href="/course_overview"> 
                                 <button class="CategoryButton"> 
-                                    <img class="CategoryIconContainer" src="/public/images/icons/uni_course_01.png">
+                                    <img loading="lazy" class="CategoryIconContainer" src="/public/images/icons/uni_course_01.png">
                                     <%= translation.btn_coursa_data %> 
                                 </button> 
                             </a>
     
                             <a href="/course_mark_average"> 
                                 <button class="CategoryButton"> 
-                                    <img class="CategoryIconContainer" src="/public/images/icons/uni_exam_01.png">
+                                    <img loading="lazy" class="CategoryIconContainer" src="/public/images/icons/uni_exam_01.png">
                                     <%= translation.btn_course_mark_average %> 
                                 </button> 
                             </a>
 
                             <a href="/location_overview"> 
                                 <button class="CategoryButton"> 
-                                    <img class="CategoryIconContainer" src="/public/images/icons/uni_building_02.png">
+                                    <img loading="lazy" class="CategoryIconContainer" src="/public/images/icons/uni_building_02.png">
                                     <%= translation.btn_locations %> 
                                 </button> 
                             </a>
 
                             <a href="/schedule_overview"> 
                                 <button class="CategoryButton"> 
-                                    <img class="CategoryIconContainer" src="/public/images/icons/uni_schedule_01.png">
+                                    <img loading="lazy" class="CategoryIconContainer" src="/public/images/icons/uni_schedule_01.png">
                                     <%= translation.btn_schedule %> 
                                 </button> 
                             </a>
@@ -69,14 +62,14 @@
 
                             <a href="/student_overview?page=1"> 
                                 <button class="CategoryButton"> 
-                                    <img class="CategoryIconContainer" src="/public/images/icons/uni_hat_02.png">
+                                    <img loading="lazy" class="CategoryIconContainer" src="/public/images/icons/uni_hat_02.png">
                                     <%= translation.btn_student_info %> 
                                 </button> 
                             </a>
 
                             <a href="/employee_overview?page=1"> 
                                 <button class="CategoryButton"> 
-                                    <img class="CategoryIconContainer" src="/public/images/icons/uni_employee_01.png">
+                                    <img loading="lazy" class="CategoryIconContainer" src="/public/images/icons/uni_employee_01.png">
                                     <%= translation.btn_employee_info %> 
                                 </button> 
                             </a>
@@ -88,14 +81,14 @@
                         <div class="CategoryButtonRow">
                             <a href="/create_person"> 
                                 <button class="CategoryButton"> 
-                                    <img class="CategoryIconContainer" src="/public/images/icons/uni_user_add_01.png">
+                                    <img loading="lazy" class="CategoryIconContainer" src="/public/images/icons/uni_user_add_01.png">
                                     <%= translation.btn_create_person %> 
                                 </button> 
                             </a>
 
                             <a href="/manage_persons"> 
                                 <button class="CategoryButton"> 
-                                    <img class="CategoryIconContainer" src="/public/images/icons/uni_manage_01.png">
+                                    <img loading="lazy" class="CategoryIconContainer" src="/public/images/icons/uni_manage_01.png">
                                     <%= translation.btn_manage_persons %> 
                                 </button> 
                             </a>

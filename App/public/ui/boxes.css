@@ -65,3 +65,9 @@
 .FlexBox {
     display: flex;
 }
+
+.FlexBoxCenter {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}

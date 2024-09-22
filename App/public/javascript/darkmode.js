@@ -12,18 +12,6 @@ document.addEventListener("DOMContentLoaded", (e) => {
         else {
             body.classList.remove("dark-mode");
         }
-
-        for (let i=0; i<aCategoryButtons.length; i++ ) {
-            let oButton = aCategoryButtons[i];
-            console.log( oButton );
-
-            if ( mode == "true" ){
-                oButton.className = "CategoryButton-dark-mode";
-            }
-            else {
-                oButton.className = "CategoryButton";
-            }
-        }
     }
 
     switchDarkmode();

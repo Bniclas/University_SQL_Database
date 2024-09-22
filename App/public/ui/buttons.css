@@ -28,7 +28,7 @@
         color: var(--basic--color);
     }
 
-    .CategoryButton-dark-mode {
+    .dark-mode .CategoryButton {
         border-radius: 30px;
         border-width: 0px;
         border-style: solid;
@@ -51,17 +51,17 @@
         line-break: anywhere;
     }
 
-    .CategoryButton-dark-mode * {
+    .dark-mode .CategoryButton * {
         padding: 30px;
     }
 
-    .CategoryButton-dark-mode:hover {
+    .dark-mode .CategoryButton:hover {
         background-color: rgb(15, 15, 15);
         cursor: pointer;
         color: var(--basic--color);
     }
     
-    .StandardButton {
+    .StandardButton, .StandardButtonWide {
         border-radius: 10px;
         border-width: 0px;
         border-style: solid;
@@ -106,7 +106,7 @@
         transition: background-color 0.3s ease;
     }
 
-    .CategoryButton:hover {
+    .CategoryButton:hover, .StandardButtonWide:hover {
         background-color: rgb(80, 79, 79);
         cursor: pointer;
         color: var(--basic--color);
@@ -116,7 +116,7 @@
         padding: 30px;
     }
 
-    .CategoryButton-dark-mode {
+    .dark-mode .CategoryButton {
         border-radius: 30px;
         border-width: 0px;
         border-style: solid;
@@ -138,13 +138,13 @@
         transition: background-color 0.3s ease;
     }
 
-    .CategoryButton-dark-mode:hover {
+    .dark-mode .CategoryButton:hover {
         background-color: rgb(15, 15, 15);
         cursor: pointer;
         color: var(--basic--color);
     }
 
-    .CategoryButton-dark-mode * {
+    .dark-mode .CategoryButton * {
         padding: 30px;
     }
 
