@@ -11,7 +11,7 @@ SELECT  student.mat_id as "Matriculation number",
         SUBSTRING( person.birthdate, 1, 12 ) as "Birthdate"
 FROM student 
 INNER JOIN person ON person.person_id = student.fk_person
-INNER JOIN gender ON gender.gender = person.gender;
+LEFT JOIN gender ON gender.gender = person.gender;
 
 
 /*

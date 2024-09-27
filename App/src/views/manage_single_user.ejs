@@ -7,8 +7,37 @@
             <%- include("essentials/page_head.ejs") %>
             <div class="PageContent">
                 
+                <form action="/editperson?personid=<%= person['person_id'] %>" method="post" >
 
-                <button class="StandardButton" id="go-back"><%= translation.nav_back %></button>
+                    <label for="ch_student"> <%= translation.student %></label>
+                    <% if ( student != false ) { %>
+                        <input type="checkbox" id="ch_student" name="ch_student" value="X" checked>
+                    <% } else { %>
+                        <input type="checkbox" id="ch_student" name="ch_student" value="X">
+                    <% } %>
+                    
+                    <label for="ch_manager"> <%= translation.manager %></label>
+                    <% if ( manager != false ) { %>
+                        <input type="checkbox" id="ch_manager" name="ch_manager" value="X" checked>
+                    <% } else { %>
+                        <input type="checkbox" id="ch_manager" name="ch_manager" value="X">
+                    <% } %>
+                    
+                    <label for="ch_admin"> <%= translation.admin %></label>
+                    <% if ( admin != false ) { %>
+                        <input type="checkbox" id="ch_admin" name="ch_admin" value="X" checked>
+                    <% } else { %>
+                        <input type="checkbox" id="ch_admin" name="ch_admin" value="X">
+                    <% } %>
+
+                    <br>
+
+                    <div class="FlexBox">
+                        <button type="submit" class="StandardButton" id="btn_save"><%= translation.btn_save %></button>
+                        <button type="button" class="StandardButton" id="go-back"><%= translation.nav_back %></button>
+                    </div>
+
+                </form>
             <div>
         </div>
     </body>

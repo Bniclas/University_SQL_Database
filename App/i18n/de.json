@@ -8,6 +8,7 @@
     "btn_schedule": "Nächste Kurssitzungen",
     "btn_myprofile": "Mein Profil",
     "btn_create_person": "Erstellen Sie eine neue Person",
+    "btn_save": "Speichern",
     "matric_num": "Matrikelnummer",
     "personid": "Personen-ID",
     "gender": "Geschlecht",
@@ -35,7 +36,7 @@
     "city": "Stadt",
     "street": "Straße",
     "room_number": "Zimmer",
-    "floor": "Boden",
+    "floor": "Etage",
     "starttime": "Start",
     "endtime": "Ende",
     "btn_login": "Login",
@@ -52,5 +53,8 @@
     "msg_person_created": "Erfolg: Neue Person erstellt!",
     "msg_person_create_fail": "Fehler: Testbenutzer konnte nicht erstellt werden!",
     "btn_manage_persons": "Personen verwalten",
-    "actions": "Aktionen"
+    "actions": "Aktionen",
+    "student": "Student",
+    "manager": "Manager",
+    "admin": "Admin"
   }

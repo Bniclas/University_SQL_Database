@@ -64,8 +64,8 @@ app.use(i18n({
 }));
 app.use( helmet() );
 app.use( rateLimit({
-	windowMs: 15 * 60 * 1000, // 15 minutes
-	limit: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes).
+	windowMs: 3 * 60 * 1000, // 3 minutes
+	limit: 100, // Limit each IP to 100 requests per `window` (here, per 3 minutes).
 	standardHeaders: 'draft-7', // draft-6: `RateLimit-*` headers; draft-7: combined `RateLimit` header
 	legacyHeaders: false, // Disable the `X-RateLimit-*` headers.
 }) );
@@ -374,18 +374,70 @@ app.post("/manage_persons", requireAdmin, [
 	}
 	catch( e ){
 		console.log( e );
+		response.redirect("/home");
 	}
 })
 
 app.get("/manage_specific_user", requireAdmin, async ( request, response ) => {
 	const nPersonID = request.query.personid;
 	try {
-		let [rows, fields] = await SQLDB.execute("SELECT * FROM view_person_essential WHERE person_id = ?", [ nPersonID ]);
+		let [oPerson, _] = await SQLDB.execute("SELECT * FROM view_person_essential WHERE person_id = ?", [ nPersonID ]);
 
-		response.render( 'manage_single_user', await mountData( request, response, { person: rows[0] } ) );
+		let [oAdmin, __] = await SQLDB.execute("SELECT * FROM admin WHERE fk_person = ?", [ nPersonID ]);
+
+		let [oManager, ___] = await SQLDB.execute("SELECT * FROM manager WHERE fk_person = ?", [ nPersonID ]);
+
+		let [oStudent, ____] = await SQLDB.execute("SELECT * FROM student WHERE fk_person = ?", [ nPersonID ]);
+
+		var bManager, bAdmin, bStudent;
+
+		bAdmin = ( oAdmin[0] != null ) ? true : false;
+		bManager = ( oManager[0] != null ) ? true : false;
+		bStudent = ( oStudent[0] != null ) ? true : false;
+
+		response.render( 'manage_single_user', await mountData( request, response, { person: oPerson[0], admin: bAdmin, manager: bManager, student: bStudent } ) );
 	}
 	catch( e ){
 		console.log( e );
+		response.redirect("/home");
+	}
+})
+
+app.post("/editperson", requireAdmin, async ( request, response ) => {
+	const nPersonID = request.query.personid;
+	const oBody = request.body;
+	try {
+		var bCheckAdmin, bCheckManager, bCheckStudent; 
+		bCheckAdmin = oBody.ch_admin;
+		bCheckManager = oBody.ch_manager;
+		bCheckStudent = oBody.ch_student;
+
+		if ( bCheckStudent ) {
+			await SQLDB.execute("INSERT IGNORE INTO student (fk_person) VALUES ( ? )", [ nPersonID ]);
+		}
+		else {
+			await SQLDB.execute("DELETE FROM student WHERE fk_person = ?", [ nPersonID ]);
+		}
+
+		if ( bCheckManager ) {
+			await SQLDB.execute("INSERT IGNORE INTO manager (fk_person) VALUES ( ? )", [ nPersonID ]);
+		}
+		else {
+			await SQLDB.execute("DELETE FROM manager WHERE fk_person = ?", [ nPersonID ]);
+		}
+
+		if ( bCheckAdmin ) {
+			await SQLDB.execute("INSERT IGNORE INTO admin (fk_person) VALUES ( ? )", [ nPersonID ]);
+		}
+		else {
+			await SQLDB.execute("DELETE FROM admin WHERE fk_person = ?", [ nPersonID ]);
+		}
+
+		response.render( 'home', await mountData( request, response, { } ) );
+	}
+	catch( e ){
+		console.log( e );
+		response.redirect("/home");
 	}
 })
 	

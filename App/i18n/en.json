@@ -8,6 +8,7 @@
     "btn_schedule": "Next Course Sessions",
     "btn_myprofile": "My Profile",
     "btn_create_person": "Create a new Person",
+    "btn_save": "Save",
     "matric_num": "Matriculation Number",
     "personid": "PersonID",
     "gender": "Gender",
@@ -52,5 +53,8 @@
     "msg_person_created": "Success: Created new Person!",
     "msg_person_create_fail": "Error: Test user could not be created!",
     "btn_manage_persons": "Manage Persons",
-    "actions": "Actions"
+    "actions": "Actions",
+    "student": "Student",
+    "manager": "Manager",
+    "admin": "Admin"
 }

@@ -8,26 +8,29 @@
             <div class="PageContent">
                 <% if (chosen) { %>
                     <h3>General Data</h3>
-                    <%= translation.course_id %> :
-                    <%= course_data.CourseID %>
-                    <br>
 
-                    <%= translation.average_mark %> :
-                    <%= course_data.Course_Markaverage %>
-                    <br>
-                    <h3>Marks</h3>
-                    <% if (mark_data.length > 0){  %>
-                        <% mark_data.forEach( function(mark) { %>
-                            <% var colorMarkClass = "MarkRed" %>
-                            <% if ( parseFloat(mark["reached_mark"]) <= 4.0 ) { %>
-                                <% colorMarkClass = "MarkGreen" %>
-                            <% }; %>
-                            <b class="<%= colorMarkClass %>"><%= parseFloat(mark["reached_mark"]).toFixed(1) %> : </b> <%= mark["count"] %>
-                            <br>
-                        <% }) %>
-                    <% }; %>
-                    <br>
-                    <br>
+                    <p>
+                        <%= translation.course_id %> :
+                        <%= course_data.CourseID %>
+                        <br>
+
+                        <%= translation.average_mark %> :
+                        <%= course_data.Course_Markaverage %>
+                        <br>
+                        <h3>Marks</h3>
+                        <% if (mark_data.length > 0){  %>
+                            <% mark_data.forEach( function(mark) { %>
+                                <% var colorMarkClass = "MarkRed" %>
+                                <% if ( parseFloat(mark["reached_mark"]) <= 4.0 ) { %>
+                                    <% colorMarkClass = "MarkGreen" %>
+                                <% }; %>
+                                <b class="<%= colorMarkClass %>"><%= parseFloat(mark["reached_mark"]).toFixed(1) %> : </b> <%= mark["count"] %>
+                                <br>
+                            <% }) %>
+                        <% }; %>
+                        <br>
+                        <br>
+                    </p>
                 <% } else { %>
                     <table>
                         <tr>
