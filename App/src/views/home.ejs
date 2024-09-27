@@ -15,7 +15,7 @@
                 <% } %>
                 <div class="CategoryContainer">
                     <% if ( loginstatus === true ) { %>
-                        <h3>Private Area</h3>
+                        <h3>Your Area</h3>
                         <div class="CategoryButtonRow">
                             <a href="/myprofile"> 
                                 <button class="CategoryButton"> 
@@ -23,11 +23,7 @@
                                     <%= translation.btn_myprofile %> 
                                 </button> 
                             </a>
-                        </div>
-
-                        <h3>Public Area</h3>
-
-                        <div class="CategoryButtonRow">    
+   
                             <a href="/course_overview"> 
                                 <button class="CategoryButton"> 
                                     <img loading="lazy" class="CategoryIconContainer" src="/public/images/icons/uni_course_01.png">

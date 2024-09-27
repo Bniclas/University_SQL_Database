@@ -71,7 +71,7 @@ ORDER BY course.course_id;
     Shows all courses and their mark average
 */
 CREATE VIEW view_course_mark_average AS
-SELECT course_mark_average.course_id as "CourseID", ROUND( AVG( student_reached_mark ), 2 ) as "Course_Markaverage" FROM (
+SELECT course_mark_average.course_id as "course", ROUND( AVG( student_reached_mark ), 2 ) as "average" FROM (
 	SELECT 
 		course.course_id,
 		student.mat_id,
@@ -83,6 +83,26 @@ SELECT course_mark_average.course_id as "CourseID", ROUND( AVG( student_reached_
 	GROUP BY course.course_id, student.mat_id
 ) AS course_mark_average
 GROUP BY course_mark_average.course_id;
+
+
+/*
+    Shows all different mark averages from each single exam in a course
+*/
+
+CREATE VIEW view_course_exams AS
+SELECT course_mark_average.course_id as "course", course_mark_average.exam_nr as "exam", ROUND( AVG( student_reached_mark ), 2 ) as "average" FROM (
+	SELECT 
+		course.course_id,
+		student.mat_id,
+		exam.exam_nr,
+		AVG( reached_mark ) AS "student_reached_mark"
+	FROM student 
+	INNER JOIN exam_result ON fk_matid = mat_id
+	INNER JOIN exam ON exam.exam_nr = exam_result.fk_exam
+	INNER JOIN course ON course.course_id = exam.fk_course
+	GROUP BY course.course_id, student.mat_id, exam.exam_nr
+) AS course_mark_average
+GROUP BY course_mark_average.course_id, course_mark_average.exam_nr;
 
 /*
     Shows all modules and their mark averages from their courses

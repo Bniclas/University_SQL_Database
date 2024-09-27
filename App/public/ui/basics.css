@@ -84,6 +84,18 @@ tr:nth-child(even) {
     border-bottom: 2px solid var(--basic--color);
 }
 
+.dark-mode tr {
+    background-color: rgb(94 93 93);
+    border-bottom: 2px solid var(--basic--color);
+    color: white;
+}
+
+.dark-mode tr:nth-child(even) {
+    background-color: rgb(73 73 73);
+    border-bottom: 2px solid var(--basic--color);
+    color: white;
+}
+
 table a {
     font-weight: bold;
     color:coral;

@@ -11,22 +11,31 @@
 
                     <p>
                         <%= translation.course_id %> :
-                        <%= course_data.CourseID %>
+                        <%= course_data.course %>
                         <br>
 
                         <%= translation.average_mark %> :
-                        <%= course_data.Course_Markaverage %>
+                        <%= course_data.average %>
                         <br>
                         <h3>Marks</h3>
                         <% if (mark_data.length > 0){  %>
-                            <% mark_data.forEach( function(mark) { %>
-                                <% var colorMarkClass = "MarkRed" %>
-                                <% if ( parseFloat(mark["reached_mark"]) <= 4.0 ) { %>
-                                    <% colorMarkClass = "MarkGreen" %>
-                                <% }; %>
-                                <b class="<%= colorMarkClass %>"><%= parseFloat(mark["reached_mark"]).toFixed(1) %> : </b> <%= mark["count"] %>
-                                <br>
-                            <% }) %>
+                            <table>
+                                <th> <%= translation.exam %> </th>
+                                <th> <%= translation.mark %> </th>
+                                <th> <%= translation.amount %> </th>
+                                <% mark_data.forEach( function(mark) { %>
+                                    <% var colorMarkClass = "MarkRed" %>
+                                    <% if ( parseFloat(mark["reached_mark"]) <= 4.0 ) { %>
+                                        <% colorMarkClass = "MarkGreen" %>
+                                    <% }; %>
+                                    <tr>
+                                        <td> <p> <%= mark["exam_nr"] %> </p> </td>
+                                        <td> <b class="<%= colorMarkClass %>"><%= parseFloat(mark["reached_mark"]).toFixed(1) %> </b> </td>
+                                        <td> <p> <%= mark["count"] %> </p> </td>
+                                    </tr>
+                                    
+                                <% }) %>
+                            </table>
                         <% }; %>
                         <br>
                         <br>
@@ -41,8 +50,8 @@
                         <% if (course_data.length > 0){  %>
                             <% course_data.forEach( function(course) { %>
                                 <tr>
-                                    <td> <a href="/course_mark_average?courseid=<%= course['CourseID'] %>"> <%= course["CourseID"] %> </a> </td>
-                                    <td> <%= course["Course_Markaverage"] %> </td>
+                                    <td> <a href="/course_mark_average?courseid=<%= course['course'] %>"> <%= course["course"] %> </a> </td>
+                                    <td> <%= course["average"] %> </td>
                                 </tr>
                             <% }) %>
                         <% }; %>

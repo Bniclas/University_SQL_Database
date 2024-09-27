@@ -188,19 +188,21 @@ app.get('/course_mark_average', async function(request, response) {
 	const courseid = request.query.courseid;
 	try {
 		if ( courseid ) {
-			const [course_data, _fields] = await SQLDB.execute('SELECT * FROM view_course_mark_average WHERE courseid = ?', [courseid]);
+			const [course_data, _fields] = await SQLDB.execute('SELECT * FROM view_course_mark_average WHERE course = ?', [courseid]);
 
-			if ( course_data.length == 0 ){
+
+			if ( course_data.length == 0 ){	
 				await message_service.setMessage( request, "info", "Sorry, no data found." );
 				goHome(request, response);
 				return;
 			}
 
 			const [marks_data, __fields] = await SQLDB.execute(" \
-				SELECT reached_mark, COUNT(*) as count FROM exam_result \
+				SELECT exam.exam_nr, reached_mark, COUNT(*) as count FROM exam_result \
 				JOIN exam ON exam.exam_nr = exam_result.fk_exam \
 				WHERE fk_course = ? \
-				GROUP BY reached_mark"
+				GROUP BY exam.exam_nr, reached_mark \
+				ORDER BY exam.exam_nr"
 			,[courseid]);
 
 			response.render( 'course_mark_average', await mountData( request, response, { course_data : course_data[0], mark_data: marks_data, chosen: true } ) );
@@ -433,7 +435,7 @@ app.post("/editperson", requireAdmin, async ( request, response ) => {
 			await SQLDB.execute("DELETE FROM admin WHERE fk_person = ?", [ nPersonID ]);
 		}
 
-		response.render( 'home', await mountData( request, response, { } ) );
+		response.redirect("/manage_persons");
 	}
 	catch( e ){
 		console.log( e );

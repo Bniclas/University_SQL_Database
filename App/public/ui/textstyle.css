@@ -5,3 +5,11 @@
 .MarkRed {
     color: red;
 }
+
+.dark-mode .MarkGreen{
+    color: #6edc57;
+}
+
+.dark-mode .MarkRed {
+    color: rgb(255, 104, 104);
+}
