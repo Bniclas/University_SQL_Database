@@ -6,6 +6,13 @@
         <div class="Page">
             <%- include("essentials/page_head.ejs") %>
             <div class="PageContent">
+
+                <div class="search-container">
+                    <form action="/student_overview" method="post">
+                      <input type="text" placeholder="<%= translation.search %>" name="search">
+                      <button type="submit"><i class="fa fa-search"></i></button>
+                    </form>
+                </div>
                 
                 <table>
                     <tr>
@@ -21,13 +28,13 @@
                     <% if (student_data.length > 0){  %>
                         <% student_data.forEach( function(student) { %>
                             <tr>
-                                <td> <%= student["Matriculation number"] %> </td>
-                                <td> <%= student["Name"] %> </td>
-                                <td> <%= student["Gender"] %> </td>
-                                <td> <%= student["Private Email"] %> </td>
-                                <td> <%= student["Service Email"] %> </td>
-                                <td> <%= student["Address"] %> </td>
-                                <td> <%= student["Birthdate"] %> </td>
+                                <td> <%= student["matric_number"] %> </td>
+                                <td> <%= student["name"] %> </td>
+                                <td> <%= student["gender"] %> </td>
+                                <td> <%= student["private_email"] %> </td>
+                                <td> <%= student["service_email"] %> </td>
+                                <td> <%= student["address"] %> </td>
+                                <td> <%= student["birthdate"] %> </td>
                             </tr>
                         <% }) %>
                     <% }; %>

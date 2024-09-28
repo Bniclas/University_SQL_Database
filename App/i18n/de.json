@@ -14,7 +14,7 @@
     "gender": "Geschlecht",
     "mail_private": "Private E-Mail",
     "mail_service": "Service-E-Mail",
-    "fullname": "Vollständiger Name",
+    "fullname": "Vollständiger name",
     "address": "Adresse",
     "birthdate": "Geburtsdatum",
     "template": "Vorlage",
@@ -58,5 +58,6 @@
     "manager": "Manager",
     "admin": "Admin",
     "amount": "Anzahl",
-    "exam": "Klausur"
+    "exam": "Klausur",
+    "search": "Suchen"
   }

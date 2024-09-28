@@ -160,7 +160,7 @@ app.get('/student_overview', requireManager, async function(request, response) {
 	const lowerLimit = page * limit;
 
 	try {
-		await SQLDB.execute("SELECT * FROM view_student_information WHERE `Matriculation NUMBER` > ? ORDER BY `Matriculation NUMBER` ASC LIMIT 25;", [lowerLimit])
+		await SQLDB.execute("SELECT * FROM view_student_information WHERE matric_number > ? ORDER BY matric_number ASC LIMIT 25;", [lowerLimit])
 		.then( async([rows,fields]) => {
 			response.render( 'student_overview', await mountData( request, response, {student_data: rows} ) );
 		});
@@ -168,6 +168,23 @@ app.get('/student_overview', requireManager, async function(request, response) {
 	catch (e){
 		console.log( e );
 		goHome(request, response);
+	}
+});
+
+app.post('/student_overview', requireManager, [
+		check('search').escape(),
+	], async function( request, response ) {
+	const sSearchParam = "%" + request.body.search + "%";
+	try {
+		console.log( sSearchParam );
+		await SQLDB.execute("SELECT * FROM view_student_information WHERE private_email LIKE ? OR service_email LIKE ? OR name LIKE ? OR address LIKE ? OR birthdate LIKE ? LIMIT 100;", [ sSearchParam, sSearchParam, sSearchParam, sSearchParam, sSearchParam])
+		.then( async([rows,fields]) => {
+			response.render( 'student_overview', await mountData( request, response, {student_data: rows} ) );
+		});
+	}
+	catch( e ){
+		console.log( e );
+		response.redirect("/student_overview");
 	}
 });
 
@@ -367,7 +384,7 @@ app.post("/manage_persons", requireAdmin, [
 	], async function( request, response ) {
 	const sSearchParam = "%" + request.body.search + "%";
 	try {
-		let [rows, fields] = await SQLDB.execute("SELECT * FROM view_person_essential WHERE person_id LIKE ? OR email_private LIKE ? OR email_service LIKE ? LIMIT 100", [ sSearchParam, sSearchParam, sSearchParam ]);
+		let [rows, fields] = await SQLDB.execute("SELECT * FROM view_person_essential WHERE person_id LIKE ? OR firstname LIKE ? OR surname LIKE ? OR email_private LIKE ? OR email_service LIKE ? LIMIT 100", [ sSearchParam, sSearchParam, sSearchParam, sSearchParam, sSearchParam ]);
 	
 		if ( rows.length >90 ){
 			await message_service.setMessage( request, "warn", "Many results found. Limit was set at 100 rows." );

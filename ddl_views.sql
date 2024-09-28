@@ -2,13 +2,13 @@
     Shows all the relevant information about a student
 */
 CREATE VIEW view_student_information AS
-SELECT  student.mat_id as "Matriculation number",
-        gender.gender_name as "Gender",
-        person.email_private as "Private Email",
-        person.email_service as "Service Email",
-        CONCAT( person.firstname, ' ', person.surname ) as "Name",
-        CONCAT( person.postcode, ' ', person.location, ' ', person.street ) as "Address", 
-        SUBSTRING( person.birthdate, 1, 12 ) as "Birthdate"
+SELECT  student.mat_id as "matric_number",
+        gender.gender_name as "gender",
+        person.email_private as "private_email",
+        person.email_service as "service_email",
+        CONCAT( person.firstname, ' ', person.surname ) as "name",
+        CONCAT( person.postcode, ' ', person.location, ' ', person.street ) as "address", 
+        SUBSTRING( person.birthdate, 1, 12 ) as "birthdate"
 FROM student 
 INNER JOIN person ON person.person_id = student.fk_person
 LEFT JOIN gender ON gender.gender = person.gender;
@@ -18,7 +18,7 @@ LEFT JOIN gender ON gender.gender = person.gender;
     Shows all students and their markaverage even they have not written any exam yet
 */
 CREATE VIEW view_markaverage_student_all AS
-SELECT  mat_id as "Matriculation number", 
+SELECT  mat_id as "matric_number", 
         ROUND( AVG( reached_mark ), 2 ) "Grade average"
 FROM student 
 LEFT JOIN exam_result ON fk_matid = mat_id
@@ -29,7 +29,7 @@ GROUP BY mat_id;
     Shows all students and their markaverage that already have written an exam
 */
 CREATE VIEW view_markaverage_student_filter AS
-SELECT  mat_id as "Matriculation number", 
+SELECT  mat_id as "matric_number", 
         ROUND( AVG( reached_mark ), 2 ) "Grade average"
 FROM student 
 INNER JOIN exam_result ON fk_matid = mat_id
@@ -40,8 +40,8 @@ GROUP BY mat_id;
     Shows all students and their courses if they have some
 */
 CREATE VIEW view_student_current_courses AS
-SELECT  student.mat_id as "Matriculation number", 
-        CONCAT(person.firstname, ' ', person.surname) AS "Name", 
+SELECT  student.mat_id as "matric_number", 
+        CONCAT(person.firstname, ' ', person.surname) AS "name", 
         module.module_name as "Module name", 
         module.module_ects as "Module ECTS"
 FROM student_course
@@ -55,7 +55,7 @@ INNER JOIN person ON person.person_id = student.fk_person;
 */
 CREATE VIEW view_course_student_amount AS
 SELECT  course.course_id AS "Course ID", 
-        module.module_name AS "Module Name", 
+        module.module_name AS "Module name", 
         CONCAT(person.firstname, ' ', person.surname) AS "Professor", 
         COUNT( student_course.fk_matid ) AS "Amount students" 
 FROM course
