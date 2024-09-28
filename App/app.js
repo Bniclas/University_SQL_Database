@@ -176,7 +176,6 @@ app.post('/student_overview', requireManager, [
 	], async function( request, response ) {
 	const sSearchParam = "%" + request.body.search + "%";
 	try {
-		console.log( sSearchParam );
 		await SQLDB.execute("SELECT * FROM view_student_information WHERE private_email LIKE ? OR service_email LIKE ? OR name LIKE ? OR address LIKE ? OR birthdate LIKE ? LIMIT 100;", [ sSearchParam, sSearchParam, sSearchParam, sSearchParam, sSearchParam])
 		.then( async([rows,fields]) => {
 			response.render( 'student_overview', await mountData( request, response, {student_data: rows} ) );
@@ -458,6 +457,10 @@ app.post("/editperson", requireAdmin, async ( request, response ) => {
 		console.log( e );
 		response.redirect("/home");
 	}
+})
+
+app.get("/imprint", requireAuth, async (request, response) => {
+	response.render( 'imprint', await mountData( request, response, { } ) );
 })
 	
 

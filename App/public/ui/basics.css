@@ -85,13 +85,13 @@ tr:nth-child(even) {
 }
 
 .dark-mode tr {
-    background-color: rgb(94 93 93);
+    background-color: rgb(31 27 43);
     border-bottom: 2px solid var(--basic--color);
     color: white;
 }
 
 .dark-mode tr:nth-child(even) {
-    background-color: rgb(73 73 73);
+    background-color: var(--darkmode--bgcolor);
     border-bottom: 2px solid var(--basic--color);
     color: white;
 }
