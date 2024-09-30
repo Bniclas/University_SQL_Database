@@ -133,6 +133,25 @@ SELECT person_id, gender, firstname, surname, birthdate, email_private, email_se
 */
 
 CREATE VIEW view_person_course_essential AS 
+SELECT  DISTINCT person.person_id, 
+        course_id, 
+        module_name, 
+        module_ects, 
+        semester_id, 
+        CONCAT( semester_typ, " ", SUBSTRING( semester_start, 3, 2 ), "/", SUBSTRING( semester_end, 3, 2 ) ) as "semester" 
+FROM person
+JOIN student ON student.fk_person = person.person_id
+JOIN student_course ON student_course.fk_matid = student.mat_id
+JOIN course ON course.course_id = student_course.fk_course
+JOIN module ON module.module_id = course.fk_module
+JOIN semester ON semester.semester_id = course.fk_semester;
+
+
+/*
+    Shows all information about the courses from a student and their course marks
+*/
+
+CREATE VIEW view_person_course_essential_marks AS 
 SELECT  person.person_id, 
         course_id, 
         module_name, 
@@ -140,7 +159,8 @@ SELECT  person.person_id,
         semester_id, 
         CONCAT( semester_typ, " ", SUBSTRING( semester_start, 3, 2 ), "/", SUBSTRING( semester_end, 3, 2 ) ) as "semester",
         reached_mark,
-        fk_exam
+        exam.exam_nr,
+        student_exam_attempt.attempt
 FROM person
 JOIN student ON student.fk_person = person.person_id
 JOIN student_course ON student_course.fk_matid = student.mat_id
@@ -148,4 +168,5 @@ JOIN course ON course.course_id = student_course.fk_course
 JOIN module ON module.module_id = course.fk_module
 JOIN semester ON semester.semester_id = course.fk_semester
 LEFT JOIN exam ON exam.fk_course = course.course_id
-LEFT JOIN exam_result ON ( exam_result.fk_matid = student.mat_id AND exam_result.fk_exam = exam.exam_nr );
+LEFT JOIN exam_result ON ( exam_result.fk_matid = student.mat_id AND exam_result.fk_exam = exam.exam_nr )
+LEFT JOIN student_exam_attempt ON ( student_exam_attempt.fk_exam = exam_result.fk_exam AND exam_result.fk_matid = student_exam_attempt.fk_matid);

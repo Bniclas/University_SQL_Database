@@ -26,27 +26,15 @@
                         <th><%= translation.module_name %></th>
                         <th><%= translation.ects %></th>
                         <th><%= translation.semester %></th>
-                        <th><%= translation.mark %></th>
                     </tr>
 
                     <% if (mycourses.length > 0){  %>
                         <% mycourses.forEach( function(course) { %>
                             <tr>
-                                <%  var colorMarkClass = "MarkRed" 
-                                    course["reached_mark"] = course["reached_mark"] || ""
-                                %>
-                                <% if ( parseFloat(course["reached_mark"]) <= 4.0 ) { %>
-                                    <% colorMarkClass = "MarkGreen" %>
-                                <% }; %>
                                 <td> <a href="/course_mark_average?courseid=<%= course['course_id'] %>"> <%= course["course_id"] %> </a> </td>
                                 <td> <%= course["module_name"] %> </td>
                                 <td> <%= course["module_ects"] %> </td>
                                 <td> <%= course["semester"] %> </td>
-                                <% if ( isNaN( parseFloat(course["reached_mark"]) ) ){ %>
-                                    <td> <b class="<%= colorMarkClass %>"> ... </b> </td>
-                                <% } else { %>
-                                    <td> <b class="<%= colorMarkClass %>"><%= parseFloat(course["reached_mark"]).toFixed(1) %></b> </td>
-                                <% }; %>
                             </tr>
                         <% }) %>
                     <% }; %>

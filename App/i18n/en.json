@@ -60,5 +60,6 @@
     "amount": "Amount",
     "exam": "Exam",
     "search": "Search",
-    "imprint": "Imprint"
+    "imprint": "Imprint",
+    "attempt": "Attempt"
 }

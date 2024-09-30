@@ -205,7 +205,7 @@ app.get('/course_mark_average', async function(request, response) {
 	try {
 		if ( courseid ) {
 			const [course_data, _fields] = await SQLDB.execute('SELECT * FROM view_course_mark_average WHERE course = ?', [courseid]);
-
+			
 
 			if ( course_data.length == 0 ){	
 				await message_service.setMessage( request, "info", "Sorry, no data found." );
@@ -221,7 +221,11 @@ app.get('/course_mark_average', async function(request, response) {
 				ORDER BY exam.exam_nr"
 			,[courseid]);
 
-			response.render( 'course_mark_average', await mountData( request, response, { course_data : course_data[0], mark_data: marks_data, chosen: true } ) );
+			const [personal_marks, ___fields] = await SQLDB.execute("SELECT * FROM view_person_course_essential_marks WHERE person_id = ? AND course_id = ?"
+			,[ request.session.userid, courseid ]);
+
+
+			response.render( 'course_mark_average', await mountData( request, response, { course_data : course_data[0], mark_data: marks_data, personal_marks: personal_marks, chosen: true } ) );
 		}
 		else {
 			await SQLDB.execute('SELECT * FROM view_course_mark_average;', [])

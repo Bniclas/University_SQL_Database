@@ -17,6 +17,38 @@
                         <%= translation.average_mark %> :
                         <%= course_data.average %>
                         <br>
+
+                        <h3>Your marks</h3>
+                        <table>
+                            <tr>
+                                <th><%= translation.exam %></th>
+                                <th><%= translation.mark %></th>
+                                <th><%= translation.attempt %></th>
+                            </tr>
+        
+                            
+                                <% personal_marks.forEach( function( exam ) { %>
+                                    <tr>
+                                        <%  var colorMarkClass = "MarkRed" 
+                                            exam["reached_mark"] = exam["reached_mark"] || ""
+                                        %>
+                                        <% if ( parseFloat(exam["reached_mark"]) <= 4.0 ) { %>
+                                            <% colorMarkClass = "MarkGreen" %>
+                                        <% }; %>
+                                        <td> <%= exam["exam_nr"] %> </td>
+
+                                        <% if ( isNaN( parseFloat(exam["reached_mark"]) ) ){ %>
+                                            <td> <b class="<%= colorMarkClass %>"> ... </b> </td>
+                                        <% } else { %>
+                                            <td> <b class="<%= colorMarkClass %>"><%= parseFloat(exam["reached_mark"]).toFixed(1) %></b> </td>
+                                        <% }; %>
+
+                                        <td> <%= exam["attempt"] %> </td>
+                                    </tr>
+                                <% }) %>
+                            
+                        </table>
+
                         <h3>Marks</h3>
                         <% if (mark_data.length > 0){  %>
                             <table>
