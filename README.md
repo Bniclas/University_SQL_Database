@@ -5,9 +5,8 @@ In addition, I want to create an app as userfriendly as possible to use.
 
 > [!IMPORTANT]
 > Future updates will provide features like:
-> * Personal profile area in frontend
-> * Login form
-> * More packages to analye the data from the database
+> * Edit Profile functionality
+> * Advance mobile support
 > * Fixing security vulnerabilities
 
 ## Frontend Preview
