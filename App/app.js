@@ -89,6 +89,8 @@ app.use( "/student", studentRouter );
 app.use( "/course", courseRouter );
 app.use( "/myprofile", myprofileRouter );
 app.use( "/employee", employeeRouter );
+app.use( "/location", locationRouter );
+app.use( "/schedule", scheduleRouter );
 app.use( "/imprint", imprintRouter );
 
 app.set( 'views', path.join(__dirname, '/src/views') );
