@@ -7,7 +7,7 @@
             <%- include("essentials/page_head.ejs") %>
             <div class="PageContent">
                 
-                <form action="/editperson?personid=<%= person['person_id'] %>" method="post" >
+                <form action="/person/<%= person['person_id'] %>" method="post" >
 
                     <label for="ch_student"> <%= translation.student %></label>
                     <% if ( student != false ) { %>

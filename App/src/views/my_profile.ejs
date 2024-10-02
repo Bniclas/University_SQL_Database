@@ -31,7 +31,7 @@
                     <% if (mycourses.length > 0){  %>
                         <% mycourses.forEach( function(course) { %>
                             <tr>
-                                <td> <a href="/course_mark_average?courseid=<%= course['course_id'] %>"> <%= course["course_id"] %> </a> </td>
+                                <td> <a href="/course/show?id=<%= course['course_id'] %>"> <%= course["course_id"] %> </a> </td>
                                 <td> <%= course["module_name"] %> </td>
                                 <td> <%= course["module_ects"] %> </td>
                                 <td> <%= course["semester"] %> </td>

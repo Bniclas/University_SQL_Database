@@ -8,7 +8,7 @@
             <div class="PageContent">
                 
                 <div class="search-container">
-                    <form action="/manage_persons" method="post">
+                    <form action="/person/manage" method="post">
                       <input type="text" placeholder="<%= translation.search %>" name="search">
                       <button type="submit"><i class="fa fa-search"></i></button>
                     </form>
@@ -35,7 +35,7 @@
                                 <td> <%= res["email_private"] %> </td>
                                 <td> <%= res["email_service"] %> </td>
                                 <td> <%= res["postcode"] %> </td>
-                                <td> <a href="/manage_specific_user?personid=<%= res['person_id'] %>"> <button class="StandardButton" > <%= translation.actions %> </button> </a> </td>
+                                <td> <a href="/person/manage/<%= res['person_id'] %>"> <button class="StandardButton" > <%= translation.actions %> </button> </a> </td>
                             </tr>
                         <% }) %>
                     <% }; %>

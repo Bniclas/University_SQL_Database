@@ -1,4 +1,4 @@
-const user = require("./user");
+const user = require("../util/user");
 
 async function checkLogin( request, response, input_mail, input_pw ){
     const userExists = await user.userExistsByEmail( input_mail );

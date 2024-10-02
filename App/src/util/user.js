@@ -1,7 +1,7 @@
-const db = require("./database_config").SQLDB;
-const hashSaltRounds = require("./database_config").hashSaltRounds;
+const db = require("../database/database_config").SQLDB;
+const hashSaltRounds = require("../database/database_config").hashSaltRounds;
 const bcrypt = require("bcrypt");
-const message_service = require( "../util/service_message" );
+const message_service = require( "./service_message" );
 
 const getLoginStatus = async ( req ) => {
     return ( req.session.hasAuth || false );
